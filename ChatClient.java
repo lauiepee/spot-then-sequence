@@ -90,7 +90,7 @@ public class ChatClient extends JDialog{
         a10.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                messageArea_1.append(name + ": " + "A10" + "\t" + formatter.format(now.getTime())+"\n");
+                 out.println("A10");
             }
         });
         
@@ -99,7 +99,7 @@ public class ChatClient extends JDialog{
         a2.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                messageArea_1.append(name + ": " + "A2" + "\t" + formatter.format(now.getTime())+"\n");
+                 out.println("A2");
             }
         });
         
@@ -108,7 +108,7 @@ public class ChatClient extends JDialog{
         a3.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                messageArea_1.append(name + ": " + "A3" + "\t" + formatter.format(now.getTime())+"\n");
+                 out.println("A3");
             }
         });
         
@@ -117,7 +117,7 @@ public class ChatClient extends JDialog{
         a4.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                messageArea_1.append(name + ": " + "A4" + "\t" + formatter.format(now.getTime())+"\n");
+                 out.println("A4");
             }
         });
         
@@ -126,7 +126,7 @@ public class ChatClient extends JDialog{
         a5.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                messageArea_1.append(name + ": " + "A5" + "\t" + formatter.format(now.getTime())+"\n");
+                 out.println("A5");
             }
         });
         
@@ -135,7 +135,7 @@ public class ChatClient extends JDialog{
         a6.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                messageArea_1.append(name + ": " + "A6" + "\t" + formatter.format(now.getTime())+"\n");
+                 out.println("A6");
             }
         });
         
@@ -144,7 +144,7 @@ public class ChatClient extends JDialog{
         a7.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                messageArea_1.append(name + ": " + "A7" + "\t" + formatter.format(now.getTime())+"\n");
+                 out.println("A7");
             }
         });
         
@@ -153,7 +153,7 @@ public class ChatClient extends JDialog{
         a8.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                messageArea_1.append(name + ": " + "A8" + "\t" + formatter.format(now.getTime())+"\n");
+                 out.println("A8");
             }
         });
         
@@ -162,7 +162,7 @@ public class ChatClient extends JDialog{
         a9.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                messageArea_1.append(name + ": " + "A9" + "\t" + formatter.format(now.getTime())+"\n");
+                 out.println("A9");
             }
         });
         
@@ -171,7 +171,7 @@ public class ChatClient extends JDialog{
         a1.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                messageArea_1.append(name + ": " + "A1" + "\t" + formatter.format(now.getTime())+"\n");
+                 out.println("A1");
             }
         });
         
@@ -180,7 +180,7 @@ public class ChatClient extends JDialog{
         B10.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                messageArea_1.append(name + ": " + "B10" + "\t" + formatter.format(now.getTime())+"\n");
+                 out.println("B10");
             }
         });
         
@@ -189,7 +189,7 @@ public class ChatClient extends JDialog{
         B2.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                messageArea_1.append(name + ": " + "B2" + "\t" + formatter.format(now.getTime())+"\n");
+                 out.println("B2");
             }
         });
         
@@ -198,7 +198,7 @@ public class ChatClient extends JDialog{
         B3.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                messageArea_1.append(name + ": " + "B3" + "\t" + formatter.format(now.getTime())+"\n");
+                 out.println("B3");
             }
         });
         
@@ -207,7 +207,7 @@ public class ChatClient extends JDialog{
         B4.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                messageArea_1.append(name + ": " + "B4" + "\t" + formatter.format(now.getTime())+"\n");
+                 out.println("B4");
             }
         });
         
@@ -216,7 +216,7 @@ public class ChatClient extends JDialog{
         B5.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                messageArea_1.append(name + ": " + "B5" + "\t" + formatter.format(now.getTime())+"\n");
+                 out.println("B5");
             }
         });
         
@@ -225,7 +225,7 @@ public class ChatClient extends JDialog{
         B6.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                messageArea_1.append(name + ": " + "B6" + "\t" + formatter.format(now.getTime())+"\n");
+                 out.println("B6");
             }
         });
         
@@ -234,7 +234,7 @@ public class ChatClient extends JDialog{
         B7.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                messageArea_1.append(name + ": " + "B7" + "\t" + formatter.format(now.getTime())+"\n");
+                 out.println("B7");
             }
         });
         
@@ -243,7 +243,7 @@ public class ChatClient extends JDialog{
         B8.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                messageArea_1.append(name + ": " + "B8" + "\t" + formatter.format(now.getTime())+"\n");
+                 out.println("B8");
             }
         });
         
@@ -252,7 +252,7 @@ public class ChatClient extends JDialog{
         B9.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                messageArea_1.append(name + ": " + "B9" + "\t" + formatter.format(now.getTime())+"\n");
+                 out.println("B9");
             }
         });
         
@@ -261,7 +261,7 @@ public class ChatClient extends JDialog{
         B1.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                messageArea_1.append(name + ": " + "B1" + "\t" + formatter.format(now.getTime())+"\n");
+                 out.println("B1");
             }
         });
         
@@ -270,7 +270,7 @@ public class ChatClient extends JDialog{
         C10.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                messageArea_1.append(name + ": " + "C10" + "\t" + formatter.format(now.getTime())+"\n");
+                 out.println("C10");
             }
         });
         
@@ -281,7 +281,7 @@ public class ChatClient extends JDialog{
         C2.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                messageArea_1.append(name + ": " + "C2" + "\t" + formatter.format(now.getTime())+"\n");
+                 out.println("C2");
             }
         });
         
@@ -290,7 +290,7 @@ public class ChatClient extends JDialog{
         C3.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                messageArea_1.append(name + ": " + "C3" + "\t" + formatter.format(now.getTime())+"\n");
+                 out.println("C3");
             }
         });
         
@@ -299,7 +299,7 @@ public class ChatClient extends JDialog{
         C4.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                messageArea_1.append(name + ": " + "C4" + "\t" + formatter.format(now.getTime())+"\n");
+                 out.println("C4");
             }
         });
         
@@ -308,7 +308,7 @@ public class ChatClient extends JDialog{
         C5.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                messageArea_1.append(name + ": " + "C5" + "\t" + formatter.format(now.getTime())+"\n");
+                 out.println("C5");
             }
         });
         
@@ -317,7 +317,7 @@ public class ChatClient extends JDialog{
         C6.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                messageArea_1.append(name + ": " + "C6" + "\t" + formatter.format(now.getTime())+"\n");
+                 out.println("C6");
             }
         });
         
@@ -326,7 +326,7 @@ public class ChatClient extends JDialog{
         C7.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                messageArea_1.append(name + ": " + "C7" + "\t" + formatter.format(now.getTime())+"\n");
+                 out.println("C7");
             }
         });
         
@@ -335,7 +335,7 @@ public class ChatClient extends JDialog{
         C8.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                messageArea_1.append(name + ": " + "C8" + "\t" + formatter.format(now.getTime())+"\n");
+                 out.println("C8");
             }
         });
         
@@ -344,7 +344,7 @@ public class ChatClient extends JDialog{
         C9.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                messageArea_1.append(name + ": " + "C9" + "\t" + formatter.format(now.getTime())+"\n");
+                 out.println("C9");
             }
         });
         
@@ -353,7 +353,7 @@ public class ChatClient extends JDialog{
         C1.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                messageArea_1.append(name + ": " + "C1" + "\t" + formatter.format(now.getTime())+"\n");
+                 out.println("C1");
             }
         });
         
@@ -362,7 +362,7 @@ public class ChatClient extends JDialog{
         D1.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                messageArea_1.append(name + ": " + "D1" + "\t" + formatter.format(now.getTime())+"\n");
+                 out.println("D1");
             }
         });
             
@@ -371,7 +371,7 @@ public class ChatClient extends JDialog{
         D2.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                messageArea_1.append(name + ": " + "D2" + "\t" + formatter.format(now.getTime())+"\n");
+                 out.println("D2");
             }
         });
         
@@ -380,7 +380,7 @@ public class ChatClient extends JDialog{
         D3.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                messageArea_1.append(name + ": " + "D3" + "\t" + formatter.format(now.getTime())+"\n");
+                 out.println("D3");
             }
         });
         
@@ -389,7 +389,7 @@ public class ChatClient extends JDialog{
         D4.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                messageArea_1.append(name + ": " + "D4" + "\t" + formatter.format(now.getTime())+"\n");
+                 out.println("D4");
             }
         });
         
@@ -398,7 +398,7 @@ public class ChatClient extends JDialog{
         D5.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                messageArea_1.append(name + ": " + "D5" + "\t" + formatter.format(now.getTime())+"\n");
+                 out.println("D5");
             }
         });
         
@@ -407,7 +407,7 @@ public class ChatClient extends JDialog{
         D6.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                messageArea_1.append(name + ": " + "D6" + "\t" + formatter.format(now.getTime())+"\n");
+                 out.println("D6");
             }
         });
         
@@ -416,7 +416,7 @@ public class ChatClient extends JDialog{
         D7.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                messageArea_1.append(name + ": " + "D7" + "\t" + formatter.format(now.getTime())+"\n");
+                 out.println("D7");
             }
         });
         
@@ -425,7 +425,7 @@ public class ChatClient extends JDialog{
         D8.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                messageArea_1.append(name + ": " + "D8" + "\t" + formatter.format(now.getTime())+"\n");
+                 out.println("D8");
             }
         });
         
@@ -434,7 +434,7 @@ public class ChatClient extends JDialog{
         D9.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                messageArea_1.append(name + ": " + "D9" + "\t" + formatter.format(now.getTime())+"\n");
+                 out.println("D9");
             }
         });
         
@@ -443,7 +443,7 @@ public class ChatClient extends JDialog{
         D10.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                messageArea_1.append(name + ": " + "D10" + "\t" + formatter.format(now.getTime())+"\n");
+                 out.println("D10");
             }
         });
         
@@ -452,7 +452,7 @@ public class ChatClient extends JDialog{
         E1.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                messageArea_1.append(name + ": " + "E1" + "\t" + formatter.format(now.getTime())+"\n");
+                 out.println("E1");
             }
         });
         
@@ -461,7 +461,7 @@ public class ChatClient extends JDialog{
         E2.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                messageArea_1.append(name + ": " + "E2" + "\t" + formatter.format(now.getTime())+"\n");
+                 out.println("E2");
             }
         });
         
@@ -470,7 +470,7 @@ public class ChatClient extends JDialog{
         E3.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                messageArea_1.append(name + ": " + "E3" + "\t" + formatter.format(now.getTime())+"\n");
+                 out.println("E3");
             }
         });
         
@@ -479,7 +479,7 @@ public class ChatClient extends JDialog{
         E4.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                messageArea_1.append(name + ": " + "E4" + "\t" + formatter.format(now.getTime())+"\n");
+                 out.println("E4");
             }
         });
         
@@ -488,7 +488,7 @@ public class ChatClient extends JDialog{
         E5.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                messageArea_1.append(name + ": " + "E5" + "\t" + formatter.format(now.getTime())+"\n");
+                 out.println("E5");
             }
         });
         
@@ -497,7 +497,7 @@ public class ChatClient extends JDialog{
         E6.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                messageArea_1.append(name + ": " + "E6" + "\t" + formatter.format(now.getTime())+"\n");
+                 out.println("E6");
             }
         });
         
@@ -506,7 +506,7 @@ public class ChatClient extends JDialog{
         E7.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                messageArea_1.append(name + ": " + "E7" + "\t" + formatter.format(now.getTime())+"\n");
+                 out.println("E7");
             }
         });
         
@@ -515,7 +515,7 @@ public class ChatClient extends JDialog{
         E8.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                messageArea_1.append(name + ": " + "E8" + "\t" + formatter.format(now.getTime())+"\n");
+                 out.println("E8");
             }
         });
         
@@ -524,7 +524,7 @@ public class ChatClient extends JDialog{
         E9.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                messageArea_1.append(name + ": " + "E9" + "\t" + formatter.format(now.getTime())+"\n");
+                 out.println("E9");
             }
         });
         
@@ -533,7 +533,7 @@ public class ChatClient extends JDialog{
         E10.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                messageArea_1.append(name + ": " + "E10" + "\t" + formatter.format(now.getTime())+"\n");
+                 out.println("E10");
             }
         });
         
@@ -542,7 +542,7 @@ public class ChatClient extends JDialog{
         F1.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                messageArea_1.append(name + ": " + "F1" + "\t" + formatter.format(now.getTime())+"\n");
+                 out.println("F1");
             }
         });
         
@@ -551,7 +551,7 @@ public class ChatClient extends JDialog{
         F2.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                messageArea_1.append(name + ": " + "F2" + "\t" + formatter.format(now.getTime())+"\n");
+                 out.println("F2");
             }
         });
         
@@ -560,7 +560,7 @@ public class ChatClient extends JDialog{
         F3.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                messageArea_1.append(name + ": " + "F3" + "\t" + formatter.format(now.getTime())+"\n");
+                 out.println("F3");
             }
         });
 
@@ -569,7 +569,7 @@ public class ChatClient extends JDialog{
         F4.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                messageArea_1.append(name + ": " + "F4" + "\t" + formatter.format(now.getTime())+"\n");
+                 out.println("F4");
             }
          });
         
@@ -578,7 +578,7 @@ public class ChatClient extends JDialog{
         F5.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                messageArea_1.append(name + ": " + "F5" + "\t" + formatter.format(now.getTime())+"\n");
+                 out.println("F5");
             }
         });
         
@@ -587,7 +587,7 @@ public class ChatClient extends JDialog{
         F6.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                messageArea_1.append(name + ": " + "F6" + "\t" + formatter.format(now.getTime())+"\n");
+                 out.println("F6");
             }
         });
         
@@ -596,7 +596,7 @@ public class ChatClient extends JDialog{
         F7.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                messageArea_1.append(name + ": " + "F7" + "\t" + formatter.format(now.getTime())+"\n");
+                 out.println("F7");
             }
         });
         
@@ -605,7 +605,7 @@ public class ChatClient extends JDialog{
         F8.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                messageArea_1.append(name + ": " + "F8" + "\t" + formatter.format(now.getTime())+"\n");
+                 out.println("F8");
             }
         });
         
@@ -614,7 +614,7 @@ public class ChatClient extends JDialog{
         F9.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                messageArea_1.append(name + ": " + "F9" + "\t" + formatter.format(now.getTime())+"\n");
+                 out.println("F9");
             }
         });
         
@@ -623,7 +623,7 @@ public class ChatClient extends JDialog{
         F10.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                messageArea_1.append(name + ": " + "F10" + "\t" + formatter.format(now.getTime())+"\n");
+                 out.println("F10");
             }
         });
         
@@ -632,7 +632,7 @@ public class ChatClient extends JDialog{
         G1.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                messageArea_1.append(name + ": " + "G1" + "\t" + formatter.format(now.getTime())+"\n");
+                 out.println("G1");
             }
         });
         
@@ -641,7 +641,7 @@ public class ChatClient extends JDialog{
         G2.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                messageArea_1.append(name + ": " + "G2" + "\t" + formatter.format(now.getTime())+"\n");
+                 out.println("G2");
             }
         });
         
@@ -650,7 +650,7 @@ public class ChatClient extends JDialog{
         G3.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                messageArea_1.append(name + ": " + "G3" + "\t" + formatter.format(now.getTime())+"\n");
+                 out.println("G3");
             }
         });
         
@@ -659,7 +659,7 @@ public class ChatClient extends JDialog{
         G4.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                messageArea_1.append(name + ": " + "G4" + "\t" + formatter.format(now.getTime())+"\n");
+                 out.println("G4");
             }
         });
         
@@ -668,7 +668,7 @@ public class ChatClient extends JDialog{
         G5.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                messageArea_1.append(name + ": " + "G5" + "\t" + formatter.format(now.getTime())+"\n");
+                 out.println("G5");
             }
         });
         
@@ -677,7 +677,7 @@ public class ChatClient extends JDialog{
         G6.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                messageArea_1.append(name + ": " + "G6" + "\t" + formatter.format(now.getTime())+"\n");
+                 out.println("G6");
             }
         });
         
@@ -686,7 +686,7 @@ public class ChatClient extends JDialog{
         G7.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                messageArea_1.append(name + ": " + "G7" + "\t" + formatter.format(now.getTime())+"\n");
+                 out.println("G7");
             }
         });
         
@@ -695,7 +695,7 @@ public class ChatClient extends JDialog{
         G8.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                messageArea_1.append(name + ": " + "G8" + "\t" + formatter.format(now.getTime())+"\n");
+                 out.println("G8");
             }
         });
         
@@ -704,7 +704,7 @@ public class ChatClient extends JDialog{
         G9.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                messageArea_1.append(name + ": " + "G9" + "\t" + formatter.format(now.getTime())+"\n");
+                 out.println("G9");
             }
         });
         
@@ -713,7 +713,7 @@ public class ChatClient extends JDialog{
         G10.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                messageArea_1.append(name + ": " + "G10" + "\t" + formatter.format(now.getTime())+"\n");
+                 out.println("G10");
             }
         });
         
@@ -722,7 +722,7 @@ public class ChatClient extends JDialog{
         H1.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                messageArea_1.append(name + ": " + "H1" + "\t" + formatter.format(now.getTime())+"\n");
+                 out.println("H1");
             }
         });
         
@@ -731,7 +731,7 @@ public class ChatClient extends JDialog{
         H2.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                messageArea_1.append(name + ": " + "H2" + "\t" + formatter.format(now.getTime())+"\n");
+                 out.println("H2");
             }
         });
         
@@ -740,7 +740,7 @@ public class ChatClient extends JDialog{
         H3.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                messageArea_1.append(name + ": " + "H3" + "\t" + formatter.format(now.getTime())+"\n");
+                 out.println("H3");
             }
         });
         
@@ -749,7 +749,7 @@ public class ChatClient extends JDialog{
         H4.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                messageArea_1.append(name + ": " + "H4" + "\t" + formatter.format(now.getTime())+"\n");
+                 out.println("H4");
             }
         });
         
@@ -758,7 +758,7 @@ public class ChatClient extends JDialog{
         H5.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                messageArea_1.append(name + ": " + "H5" + "\t" + formatter.format(now.getTime())+"\n");
+                 out.println("H5");
             }
         });
         
@@ -767,7 +767,7 @@ public class ChatClient extends JDialog{
         H6.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                messageArea_1.append(name + ": " + "H6" + "\t" + formatter.format(now.getTime())+"\n");
+                 out.println("H6");
             }
         });
         
@@ -776,7 +776,7 @@ public class ChatClient extends JDialog{
         H7.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                messageArea_1.append(name + ": " + "H7" + "\t" + formatter.format(now.getTime())+"\n");
+                 out.println("H7");
             }
         });
         
@@ -785,7 +785,7 @@ public class ChatClient extends JDialog{
         H8.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                messageArea_1.append(name + ": " + "H8" + "\t" + formatter.format(now.getTime())+"\n");
+                 out.println("H8");
             }
         });
         
@@ -794,7 +794,7 @@ public class ChatClient extends JDialog{
         H9.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                messageArea_1.append(name + ": " + "H9" + "\t" + formatter.format(now.getTime())+"\n");
+                 out.println("H9");
             }
         });
         
@@ -803,7 +803,7 @@ public class ChatClient extends JDialog{
         H10.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                messageArea_1.append(name + ": " + "H10" + "\t" + formatter.format(now.getTime())+"\n");
+                 out.println("H10");
             }
         });
         
@@ -812,7 +812,7 @@ public class ChatClient extends JDialog{
         I1.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                messageArea_1.append(name + ": " + "I1" + "\t" + formatter.format(now.getTime())+"\n");
+                 out.println("I1");
             }
         });
         
@@ -821,7 +821,7 @@ public class ChatClient extends JDialog{
         I2.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                messageArea_1.append(name + ": " + "I2" + "\t" + formatter.format(now.getTime())+"\n");
+                 out.println("I2");
             }
         });
         
@@ -830,7 +830,7 @@ public class ChatClient extends JDialog{
         I3.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                messageArea_1.append(name + ": " + "I3" + "\t" + formatter.format(now.getTime())+"\n");
+                 out.println("I3");
             }
         });
         
@@ -839,7 +839,7 @@ public class ChatClient extends JDialog{
         I4.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                messageArea_1.append(name + ": " + "I4" + "\t" + formatter.format(now.getTime())+"\n");
+                 out.println("I4");
             }
         });
         
@@ -848,7 +848,7 @@ public class ChatClient extends JDialog{
         I5.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                messageArea_1.append(name + ": " + "I5" + "\t" + formatter.format(now.getTime())+"\n");
+                 out.println("I5");
             }
         });
         
@@ -857,7 +857,7 @@ public class ChatClient extends JDialog{
         I6.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                messageArea_1.append(name + ": " + "I6" + "\t" + formatter.format(now.getTime())+"\n");
+                 out.println("I6");
             }
         });
         
@@ -866,7 +866,7 @@ public class ChatClient extends JDialog{
         I7.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                messageArea_1.append(name + ": " + "I7" + "\t" + formatter.format(now.getTime())+"\n");
+                 out.println("I7");
             }
         });
         
@@ -875,7 +875,7 @@ public class ChatClient extends JDialog{
         I8.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                messageArea_1.append(name + ": " + "I8" + "\t" + formatter.format(now.getTime())+"\n");
+                 out.println("I8");
             }
         });
         
@@ -884,7 +884,7 @@ public class ChatClient extends JDialog{
         I9.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                messageArea_1.append(name + ": " + "I9" + "\t" + formatter.format(now.getTime())+"\n");
+                 out.println("I9");
             }
         });
         
@@ -893,7 +893,7 @@ public class ChatClient extends JDialog{
         I10.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                messageArea_1.append(name + ": " + "I10" + "\t" + formatter.format(now.getTime())+"\n");
+                 out.println("I10");
             }
         });
         
@@ -902,7 +902,7 @@ public class ChatClient extends JDialog{
         J1.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                messageArea_1.append(name + ": " + "J1" + "\t" + formatter.format(now.getTime())+"\n");
+                 out.println("J1");
             }
         });
         
@@ -911,7 +911,7 @@ public class ChatClient extends JDialog{
         J2.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                messageArea_1.append(name + ": " + "J2" + "\t" + formatter.format(now.getTime())+"\n");
+                 out.println("J2");
             }
         });
         
@@ -920,7 +920,7 @@ public class ChatClient extends JDialog{
         J3.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                messageArea_1.append(name + ": " + "J3" + "\t" + formatter.format(now.getTime())+"\n");
+                 out.println("J3");
             }
         });
         
@@ -929,7 +929,7 @@ public class ChatClient extends JDialog{
         J4.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                messageArea_1.append(name + ": " + "J4" + "\t" + formatter.format(now.getTime())+"\n");
+                 out.println("J4");
             }
         });
         
@@ -938,7 +938,7 @@ public class ChatClient extends JDialog{
         J5.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                messageArea_1.append(name + ": " + "J5" + "\t" + formatter.format(now.getTime())+"\n");
+                 out.println("J5");
             }
         });
         
@@ -947,7 +947,7 @@ public class ChatClient extends JDialog{
         J6.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                messageArea_1.append(name + ": " + "J6" + "\t" + formatter.format(now.getTime())+"\n");
+                 out.println("J6");
             }
         });
         
@@ -956,7 +956,7 @@ public class ChatClient extends JDialog{
         J7.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                messageArea_1.append(name + ": " + "J7" + "\t" + formatter.format(now.getTime())+"\n");
+                 out.println("J7");
             }
         });
         
@@ -965,7 +965,7 @@ public class ChatClient extends JDialog{
         J8.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                messageArea_1.append(name + ": " + "J8" + "\t" + formatter.format(now.getTime())+"\n");
+                 out.println("J8");
             }
         });
         
@@ -974,7 +974,7 @@ public class ChatClient extends JDialog{
         J9.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                messageArea_1.append(name + ": " + "J9" + "\t" + formatter.format(now.getTime())+"\n");
+                 out.println("J9");
             }
         });
         
@@ -983,7 +983,7 @@ public class ChatClient extends JDialog{
         J10.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                messageArea_1.append(name + ": " + "J10" + "\t" + formatter.format(now.getTime())+"\n");
+                out.println("J10");
             }
         });
         
@@ -1146,6 +1146,17 @@ public class ChatClient extends JDialog{
 
 
         });
+        
+        textField_1.addKeyListener(new KeyAdapter() {
+            @SuppressWarnings("unlikely-arg-type")
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.equals('\n')) {
+                    out.println(textField_1.getText());
+                    textField_1.setText("");
+                }
+            }
+        });
     }
 
     /**
@@ -1189,21 +1200,20 @@ public class ChatClient extends JDialog{
             socket.getInputStream()));
         out = new PrintWriter(socket.getOutputStream(), true);
 
-        name = name+getName();
         // Process all messages from server, according to the protocol.
         while (true) {
             String line = in.readLine();
             if (line.startsWith("SUBMITNAME")) {
-                out.println(name);
+                out.println(getName());
             } else if (line.startsWith("NAMEACCEPTED")) {
                 textField_1.setEditable(true);
                 JOptionPane.showMessageDialog(frame, "Welcome! Please wait for others to join the conversation...");
             } else if (line.startsWith("SYMBOLS")) {
                 out.println(getCardSymbol());
                 JOptionPane.showMessageDialog(frame, getCardSymbol());
-                messageArea_1.append(line + "\n");
+                messageArea_1.append(line + '\n');
             } else if (line.startsWith("MESSAGE")) {
-                messageArea_1.append(line.substring(8) + "\n");
+                messageArea_1.append(line.substring(8) + '\n');
             }
         }
     }
