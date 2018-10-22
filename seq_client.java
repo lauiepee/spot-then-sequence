@@ -68,6 +68,8 @@ public class seq_client extends JDialog{
     Calendar now = Calendar.getInstance();
     SimpleDateFormat formatter = new SimpleDateFormat("E yyyy.MM.dd 'at' hh:mm:ss a zzz");
     String color;
+    int num2;
+    
     /**
      * Constructs the client by laying out the GUI and registering a
      * listener with the textfield so that pressing Return in the
@@ -77,9 +79,9 @@ public class seq_client extends JDialog{
      * message from the server.
      */
     public seq_client() {
-        setBounds(100, 100, 1173, 766);
+        setBounds(100, 100, 1259, 766);
         getContentPane().setLayout(null);
-        contentPanel.setBounds(0, 0, 1151, 710);
+        contentPanel.setBounds(0, 0, 1242, 710);
         contentPanel.setBackground(Color.DARK_GRAY);
         contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
         getContentPane().add(contentPanel);
@@ -147,12 +149,12 @@ public class seq_client extends JDialog{
                         contentPanel.add(scrollPane);
                         
                         JPanel panel = new JPanel();
-                        panel.setBounds(739, 231, 406, 475);
+                        panel.setBounds(739, 231, 494, 475);
                         contentPanel.add(panel);
                         panel.setLayout(null);
                         Image img = new ImageIcon(this.getClass().getResource(images[num])).getImage();
                         
-                        JLabel topsymbol = new JLabel("New label");
+                        JLabel topsymbol = new JLabel("");
                         topsymbol.addMouseListener(new MouseAdapter() {
                         	@Override
                         	public void mousePressed(MouseEvent arg0) {
@@ -218,7 +220,7 @@ public class seq_client extends JDialog{
                         topsymbol.setBounds(177, 141, 78, 74);
                         panel.add(topsymbol);
                         
-                        JLabel leftsymbol = new JLabel("New label");
+                        JLabel leftsymbol = new JLabel("");
                         leftsymbol.addMouseListener(new MouseAdapter() {
                         	@Override
                         	public void mousePressed(MouseEvent e) {
@@ -285,7 +287,7 @@ public class seq_client extends JDialog{
                         leftsymbol.setBounds(128, 204, 69, 74);
                         panel.add(leftsymbol);
                         
-                        JLabel bottomsymbol = new JLabel("New label");
+                        JLabel bottomsymbol = new JLabel("");
                         bottomsymbol.addMouseListener(new MouseAdapter() {
                         	@Override
                         	public void mousePressed(MouseEvent e) {
@@ -351,7 +353,7 @@ public class seq_client extends JDialog{
                         bottomsymbol.setBounds(177, 265, 78, 63);
                         panel.add(bottomsymbol);
                         
-                        JLabel rightsymbol = new JLabel("New label");
+                        JLabel rightsymbol = new JLabel("");
                         rightsymbol.addMouseListener(new MouseAdapter() {
                         	@Override
                         	public void mousePressed(MouseEvent e) {
@@ -423,10 +425,15 @@ public class seq_client extends JDialog{
                         spotitcard.setIcon(new ImageIcon(img));
                         
                         JPanel panel_1 = new JPanel();
-                        panel_1.setBounds(1004, 6, 141, 221);
+                        panel_1.setBounds(1004, 6, 229, 221);
                         contentPanel.add(panel_1);
                 
-        
+                        JLabel lblNewLabel = new JLabel("");
+                        lblNewLabel.setBounds(0, 5, 141, 216);
+                        panel_1.add(lblNewLabel);
+                        Image img2 = new ImageIcon(this.getClass().getResource(images[num2])).getImage();
+                        lblNewLabel.setIcon(new ImageIcon(img2));
+                        
         // Add Listeners
         textField_1.addActionListener(new ActionListener() {
             /**
@@ -536,7 +543,7 @@ public class seq_client extends JDialog{
 
         // Make connection and initialize streams
         String serverAddress = getServerAddress();
-        Socket socket = new Socket(serverAddress, 9001);
+        Socket socket = new Socket(serverAddress, 10);
         in = new BufferedReader(new InputStreamReader(
             socket.getInputStream()));
         out = new PrintWriter(socket.getOutputStream(), true);
@@ -557,6 +564,9 @@ public class seq_client extends JDialog{
                 messageArea_1.append(line.substring(8) + '\n');
             }  else if (line.startsWith("SUBMITCOLOR")) {
                 color = getColor();
+            } else if (line.startsWith("SERVER")) {
+                num2 = Integer.parseInt(line.substring(7));
+                System.out.println(line.substring(7));
             }
         }
     }
