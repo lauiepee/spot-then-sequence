@@ -58,9 +58,10 @@ public class seq_client extends JDialog{
     BufferedReader in;
     PrintWriter out;
     JFrame frame = new JFrame("Chatter");
-    //JTextField textField = new JTextField(40);
-    //JTextArea messageArea = new JTextArea(8, 40);
-    String[] symbols = {"a","b","c","d","e","f","g","h","i","j"}; 
+    
+    String[] symbols = {"a","b","c","d","e","f","g","h","i","j"};
+    String[] images = {"/a.png", "/b.png", "/c.png", "/d.png", "/e.png", "/f.png", "/g.png", "/h.png", "/i.png", "/j.png", "/k.png", "/l.png", "/m.png"};
+	
     private final JPanel contentPanel = new JPanel();
     private JTable table;
     private JTextField textField_1 = new JTextField(40);
@@ -79,19 +80,16 @@ public class seq_client extends JDialog{
      * message from the server.
      */
     public seq_client() {
-        setBounds(100, 100, 1259, 766);
+    	setTitle("Spot Then Sequence");
+        setBounds(100, 100, 1251, 766);
         getContentPane().setLayout(null);
         contentPanel.setBounds(0, 0, 1242, 710);
         contentPanel.setBackground(Color.DARK_GRAY);
         contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
         getContentPane().add(contentPanel);
 
-        String[] images = {"/a.png", "/b.png", "/c.png", "/d.png", "/e.png", "/f.png", "/g.png", "/h.png", "/i.png", "/j.png", "/k.png", "/l.png", "/m.png"};
-		Random rand = new Random();
+        Random rand = new Random();
 		int num = rand.nextInt(images.length-1) + 1;
-		
-		Random rand2 = new Random();
-		int num2 = rand2.nextInt(images.length-1) + 1;
 
         table = new JTable();
         table.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -131,14 +129,14 @@ public class seq_client extends JDialog{
         table.setRowHeight(70);
                 
                 textField_1 = new JTextField();
-                textField_1.setBounds(739, 6, 260, 33);
+                textField_1.setBounds(739, 10, 260, 30);
                 textField_1.setColumns(10);
                 
                         // Layout GUI
                         textField_1.setEditable(false);
                         
                         JScrollPane scrollPane = new JScrollPane();
-                        scrollPane.setBounds(739, 44, 260, 183);
+                        scrollPane.setBounds(739, 44, 260, 181);
                         
                         messageArea_1 = new JTextArea();
                         scrollPane.setViewportView(messageArea_1);
@@ -148,8 +146,11 @@ public class seq_client extends JDialog{
                         contentPanel.add(textField_1);
                         contentPanel.add(scrollPane);
                         
+
+                        
+                        
                         JPanel panel = new JPanel();
-                        panel.setBounds(739, 231, 494, 475);
+                        panel.setBounds(739, 231, 483, 475);
                         contentPanel.add(panel);
                         panel.setLayout(null);
                         Image img = new ImageIcon(this.getClass().getResource(images[num])).getImage();
@@ -158,8 +159,6 @@ public class seq_client extends JDialog{
                         topsymbol.addMouseListener(new MouseAdapter() {
                         	@Override
                         	public void mousePressed(MouseEvent arg0) {
-                        		Calendar cal = Calendar.getInstance();
-                				messageArea_1.append("" + cal.getTime());
 
                 				switch (num){
                 					case 0:
@@ -224,8 +223,6 @@ public class seq_client extends JDialog{
                         leftsymbol.addMouseListener(new MouseAdapter() {
                         	@Override
                         	public void mousePressed(MouseEvent e) {
-                        		Calendar cal = Calendar.getInstance();
-                				messageArea_1.setText("" + cal.getTime());
                 				
                 				switch (num){
                 				case 0:
@@ -291,8 +288,6 @@ public class seq_client extends JDialog{
                         bottomsymbol.addMouseListener(new MouseAdapter() {
                         	@Override
                         	public void mousePressed(MouseEvent e) {
-                        		Calendar cal = Calendar.getInstance();
-                				messageArea_1.append("" + cal.getTime());
                 				
                 				switch (num){
                 				case 0:
@@ -357,8 +352,6 @@ public class seq_client extends JDialog{
                         rightsymbol.addMouseListener(new MouseAdapter() {
                         	@Override
                         	public void mousePressed(MouseEvent e) {
-                        		Calendar cal = Calendar.getInstance();
-                				messageArea_1.append(" " + cal.getTime());
                 				
                 				switch (num){
                 				case 0:
@@ -424,15 +417,6 @@ public class seq_client extends JDialog{
                         panel.add(spotitcard);
                         spotitcard.setIcon(new ImageIcon(img));
                         
-                        JPanel panel_1 = new JPanel();
-                        panel_1.setBounds(1004, 6, 229, 221);
-                        contentPanel.add(panel_1);
-                
-                        JLabel lblNewLabel = new JLabel("");
-                        lblNewLabel.setBounds(0, 5, 141, 216);
-                        panel_1.add(lblNewLabel);
-                        Image img2 = new ImageIcon(this.getClass().getResource(images[num2])).getImage();
-                        lblNewLabel.setIcon(new ImageIcon(img2));
                         
         // Add Listeners
         textField_1.addActionListener(new ActionListener() {
@@ -543,7 +527,7 @@ public class seq_client extends JDialog{
 
         // Make connection and initialize streams
         String serverAddress = getServerAddress();
-        Socket socket = new Socket(serverAddress, 10);
+        Socket socket = new Socket(serverAddress, 9001);
         in = new BufferedReader(new InputStreamReader(
             socket.getInputStream()));
         out = new PrintWriter(socket.getOutputStream(), true);
@@ -562,422 +546,525 @@ public class seq_client extends JDialog{
                 messageArea_1.append(line + '\n');
             } else if (line.startsWith("MESSAGE")) {
                 messageArea_1.append(line.substring(8) + '\n');
-            }  else if (line.startsWith("SUBMITCOLOR")) {
+            } else if (line.startsWith("SUBMITCOLOR")) {
                 color = getColor();
             } else if (line.startsWith("SERVER")) {
                 num2 = Integer.parseInt(line.substring(7));
-                System.out.println(line.substring(7));
+                System.out.println("PAGPASA SA CLIENT: " + num2);
+                
+                JPanel panel_1 = new JPanel();
+                panel_1.setBounds(1004, 4, 229, 221);
+                contentPanel.add(panel_1);
+        
+                JLabel lblNewLabel = new JLabel("");
+                lblNewLabel.setBounds(0, 5, 141, 216);
+                panel_1.add(lblNewLabel);
+                System.out.println("CHECK NATIN ANG VALUE NG NUM2: " + num2);
+                Image img2 = new ImageIcon(this.getClass().getResource(images[num2])).getImage();
+                lblNewLabel.setIcon(new ImageIcon(img2));
+            } else if (line.startsWith("CORRECT")) {
+                messageArea_1.append(line.substring(8) + '\n');
             }
         }
     }
     
     private void matching(String playermatch, int num, int num2){
-		
+    	Random rand = new Random();
+		int num3 = rand.nextInt(images.length-1) + 1;
 		if(num2 == 0){
-			System.out.println("STRING: " + playermatch);
 				switch(num){
 					case 1:
 					case 2:
 					case 3:
-						if(playermatch == "TREE")
+						if(playermatch == "TREE"){
+    						out.println("CORRECT");
 							JOptionPane.showMessageDialog(null, "CORRECT");
+						}
 						break;
 					case 4:
 					case 5:
 					case 6:
-						if(playermatch == "ICE")
+						if(playermatch == "ICE"){
+    						out.println("CORRECT");
 							JOptionPane.showMessageDialog(null, "CORRECT");
+						}
 						break;
 					case 7:
 					case 8:
 					case 9:
-						if(playermatch == "DOLPHIN")
+						if(playermatch == "DOLPHIN"){
+							out.println("CORRECT");
 							JOptionPane.showMessageDialog(null, "CORRECT");
+						}
 						break;
 					case 10:
 					case 11:
 					case 12:
-						if(playermatch == "BULB")
+						if(playermatch == "BULB"){
+							out.println("CORRECT");
 							JOptionPane.showMessageDialog(null, "CORRECT");
+						}
 						break;
 					default:
 						JOptionPane.showMessageDialog(null, "THERE IS SUMTHING WRONG");
 						break;
 				}
 		} else if(num2 == 1){
-			System.out.println("STRING: " + playermatch);
 				switch(num){
 					case 0:
 					case 2:
 					case 3:
-						if(playermatch == "TREE")
+						if(playermatch == "TREE"){
+							out.println("CORRECT");
 							JOptionPane.showMessageDialog(null, "CORRECT");
+						}
 						break;
 					case 4:
 					case 7:
 					case 10:
-						if(playermatch == "BALLOON")
+						if(playermatch == "BALLOON"){
+							out.println("CORRECT");
 							JOptionPane.showMessageDialog(null, "CORRECT");
+						}
 						break;
 					case 5:
 					case 8:
 					case 11:
-						if(playermatch == "YINYANG")
+						if(playermatch == "YINYANG"){
+							out.println("CORRECT");
 							JOptionPane.showMessageDialog(null, "CORRECT");
+						}
 						break;
 					case 6:
 					case 9:
 					case 12:
-						if(playermatch == "SHADES")
+						if(playermatch == "SHADES"){
+							out.println("CORRECT");
 							JOptionPane.showMessageDialog(null, "CORRECT");
+						}
 						break;
 					default:
 						JOptionPane.showMessageDialog(null, "THERE IS SUMTHING WRONG");
 						break;
 				}
 		} else if(num2 == 2){
-			System.out.println("STRING: " + playermatch);
 				switch(num){
 					case 0:
 					case 1:
 					case 3:
-						if(playermatch == "TREE")
+						if(playermatch == "TREE"){
+							out.println("CORRECT");
 							JOptionPane.showMessageDialog(null, "CORRECT");
+						}
 						break;
 					case 4:
 					case 9:
 					case 11:
-						if(playermatch == "CHEESE")
+						if(playermatch == "CHEESE"){
+							out.println("CORRECT");
 							JOptionPane.showMessageDialog(null, "CORRECT");
+						}
 						break;
 					case 5:
 					case 7:
 					case 12:
-						if(playermatch == "HAND")
+						if(playermatch == "HAND"){
+							out.println("CORRECT");
 							JOptionPane.showMessageDialog(null, "CORRECT");
+						}
 						break;
 					case 6:
 					case 8:
 					case 10:
-						if(playermatch == "BOMB")
+						if(playermatch == "BOMB"){
+							out.println("CORRECT");
 							JOptionPane.showMessageDialog(null, "CORRECT");
+						}
 						break;
 					default:
 						JOptionPane.showMessageDialog(null, "THERE IS SUMTHING WRONG");
 						break;
 				}
 		} else if(num2 == 3){
-			System.out.println("STRING: " + playermatch);
 				switch(num){
 					case 0:
 					case 1:
 					case 3:
-						if(playermatch == "TREE")
+						if(playermatch == "TREE"){
+							out.println("CORRECT");
 							JOptionPane.showMessageDialog(null, "CORRECT");
+						}
 						break;
 					case 4:
 					case 8:
 					case 12:
-						if(playermatch == "TARGET")
+						if(playermatch == "TARGET"){
+							out.println("CORRECT");
 							JOptionPane.showMessageDialog(null, "CORRECT");
+						}
 						break;
 					case 5:
 					case 9:
 					case 10:
-						if(playermatch == "CANDLE")
+						if(playermatch == "CANDLE"){
+							out.println("CORRECT");
 							JOptionPane.showMessageDialog(null, "CORRECT");
+						}
 						break;
 					case 6:
 					case 7:
 					case 11:
-						if(playermatch == "LIPS")
+						if(playermatch == "LIPS"){
+							out.println("CORRECT");
 							JOptionPane.showMessageDialog(null, "CORRECT");
+						}
 						break;
 					default:
 						JOptionPane.showMessageDialog(null, "THERE IS SUMTHING WRONG");
 						break;
 				}
 		} else if(num2 == 4){
-			System.out.println("STRING: " + playermatch);
 				switch(num){
 					case 0:
 					case 5:
 					case 6:
-						if(playermatch == "ICE")
+						if(playermatch == "ICE"){
+							out.println("CORRECT");
 							JOptionPane.showMessageDialog(null, "CORRECT");
+						}
 						break;
 					case 1:
 					case 7:
 					case 10:
-						if(playermatch == "BALLOON")
+						if(playermatch == "BALLOON"){
+							out.println("CORRECT");
 							JOptionPane.showMessageDialog(null, "CORRECT");
+						}
 						break;
 					case 2:
 					case 9:
 					case 11:
-						if(playermatch == "CHEESE")
+						if(playermatch == "CHEESE"){
+							out.println("CORRECT");
 							JOptionPane.showMessageDialog(null, "CORRECT");
+						}
 						break;
 					case 3:
 					case 8:
 					case 12:
-						if(playermatch == "TARGET")
+						if(playermatch == "TARGET"){
+							out.println("CORRECT");
 							JOptionPane.showMessageDialog(null, "CORRECT");
+						}
 						break;
 					default:
 						JOptionPane.showMessageDialog(null, "THERE IS SUMTHING WRONG");
 						break;
 				}
 		} else if(num2 == 5){
-			System.out.println("STRING: " + playermatch);
 				switch(num){
 					case 0:
 					case 4:
 					case 6:
-						if(playermatch == "ICE")
+						if(playermatch == "ICE"){
+							out.println("CORRECT");
 							JOptionPane.showMessageDialog(null, "CORRECT");
+						}
 						break;
 					case 1:
 					case 8:
 					case 11:
-						if(playermatch == "YINYANG")
+						if(playermatch == "YINYANG"){
+							out.println("CORRECT");
 							JOptionPane.showMessageDialog(null, "CORRECT");
+						}
 						break;
 					case 2:
 					case 7:
 					case 12:
-						if(playermatch == "HAND")
+						if(playermatch == "HAND"){
+							out.println("CORRECT");
 							JOptionPane.showMessageDialog(null, "CORRECT");
+						}
 						break;
 					case 3:
 					case 9:
 					case 10:
-						if(playermatch == "CANDLE")
+						if(playermatch == "CANDLE"){
+							out.println("CORRECT");
 							JOptionPane.showMessageDialog(null, "CORRECT");
+						}
 						break;
 					default:
 						JOptionPane.showMessageDialog(null, "THERE IS SUMTHING WRONG");
 						break;
 				}
 		} else if(num2 == 6){
-			System.out.println("STRING: " + playermatch);
 				switch(num){
 					case 0:
 					case 4:
 					case 5:
-						if(playermatch == "ICE")
+						if(playermatch == "ICE"){
+							out.println("CORRECT");
 							JOptionPane.showMessageDialog(null, "CORRECT");
+						}
 						break;
 					case 2:
 					case 8:
 					case 10:
-						if(playermatch == "BOMB")
+						if(playermatch == "BOMB"){
+							out.println("CORRECT");
 							JOptionPane.showMessageDialog(null, "CORRECT");
+						}
 						break;
 					case 3:
 					case 7:
 					case 11:
-						if(playermatch == "LIPS")
+						if(playermatch == "LIPS"){
+							out.println("CORRECT");
 							JOptionPane.showMessageDialog(null, "CORRECT");
+						}
 						break;
 					case 1:
 					case 9:
 					case 12:
-						if(playermatch == "SHADES")
+						if(playermatch == "SHADES"){
+							out.println("CORRECT");
 							JOptionPane.showMessageDialog(null, "CORRECT");
+						}
 						break;
 					default:
 						JOptionPane.showMessageDialog(null, "THERE IS SUMTHING WRONG");
 						break;
 				}
 		} else if (num2 == 7){
-			System.out.println("STRING: " + playermatch);
 				switch(num){
 					case 3:
 					case 6:
 					case 11:
-						if(playermatch == "LIPS")
+						if(playermatch == "LIPS"){
+							out.println("CORRECT");
 							JOptionPane.showMessageDialog(null, "CORRECT");
+						}
 						break;
 					case 0:
 					case 8:
 					case 9:
-						if(playermatch == "DOLPHIN")
+						if(playermatch == "DOLPHIN"){
+							out.println("CORRECT");
 							JOptionPane.showMessageDialog(null, "CORRECT");
+						}
 						break;
 					case 1:
 					case 4:
 					case 10:
-						if(playermatch == "BALLOON")
+						if(playermatch == "BALLOON"){
+							out.println("CORRECT");
 							JOptionPane.showMessageDialog(null, "CORRECT");
+						}
 						break;
 					case 2:
 					case 5:
 					case 12:
-						if(playermatch == "HAND")
+						if(playermatch == "HAND"){
+							out.println("CORRECT");
 							JOptionPane.showMessageDialog(null, "CORRECT");
+						}
 						break;
 					default:
 						JOptionPane.showMessageDialog(null, "THERE IS SUMTHING WRONG");
 						break;
 				}
 		} else if(num2 == 8){
-			System.out.println("STRING: " + playermatch);
 				switch(num){
 					case 0:
 					case 7:
 					case 9:
-						if(playermatch == "DOLPHIN")
+						if(playermatch == "DOLPHIN"){
+							out.println("CORRECT");
 							JOptionPane.showMessageDialog(null, "CORRECT");
+						}
 						break;
 					case 2:
 					case 6:
 					case 10:
-						if(playermatch == "BOMB")
+						if(playermatch == "BOMB"){
+							out.println("CORRECT");
 							JOptionPane.showMessageDialog(null, "CORRECT");
+						}
 						break;
 					case 3:
 					case 4:
 					case 12 :
-						if(playermatch == "TARGET")
+						if(playermatch == "TARGET"){
+							out.println("CORRECT");
 							JOptionPane.showMessageDialog(null, "CORRECT");
+						}
 						break;
 					case 1:
 					case 5:
 					case 11:
-						if(playermatch == "YINYANG")
+						if(playermatch == "YINYANG"){
+							out.println("CORRECT");
 							JOptionPane.showMessageDialog(null, "CORRECT");
+						}
 						break;
 					default:
 						JOptionPane.showMessageDialog(null, "THERE IS SUMTHING WRONG");
 						break;
 				}
 		} else if(num2 == 9){
-			System.out.println("STRING: " + playermatch);
 				switch(num){
 					case 1:
 					case 6:
 					case 12:
-						if(playermatch == "SHADES")
+						if(playermatch == "SHADES"){
+							out.println("CORRECT");
 							JOptionPane.showMessageDialog(null, "CORRECT");
+						}
 						break;
 					case 3:
 					case 5:
 					case 10:
-						if(playermatch == "CANDLE")
+						if(playermatch == "CANDLE"){
+							out.println("CORRECT");
 							JOptionPane.showMessageDialog(null, "CORRECT");
+						}
 						break;
 					case 2:
 					case 4:
 					case 11 :
-						if(playermatch == "CHEESE")
+						if(playermatch == "CHEESE"){
+							out.println("CORRECT");
 							JOptionPane.showMessageDialog(null, "CORRECT");
+						}
 						break;
 					case 0:
 					case 7:
 					case 8:
-						if(playermatch == "DOLPHIN")
+						if(playermatch == "DOLPHIN"){
+							out.println("CORRECT");
 							JOptionPane.showMessageDialog(null, "CORRECT");
+						}
 						break;
 					default:
 						JOptionPane.showMessageDialog(null, "THERE IS SUMTHING WRONG");
 						break;
 				}
 		}else if(num2 == 10){
-			System.out.println("STRING: " + playermatch);
 				switch(num){
 					case 0:
 					case 10:
 					case 11:
-						if(playermatch == "BULB")
+						if(playermatch == "BULB"){
+							out.println("CORRECT");
 							JOptionPane.showMessageDialog(null, "CORRECT");
+						}
 						break;
 					case 1:
 					case 4:
 					case 7:
-						if(playermatch == "BALLOON")
+						if(playermatch == "BALLOON"){
+							out.println("CORRECT");
 							JOptionPane.showMessageDialog(null, "CORRECT");
+						}
 						break;
 					case 2:
 					case 6:
 					case 8 :
-						if(playermatch == "BOMB")
+						if(playermatch == "BOMB"){
+							out.println("CORRECT");
 							JOptionPane.showMessageDialog(null, "CORRECT");
+						}
 						break;
 					case 3:
 					case 5:
 					case 9:
-						if(playermatch == "CANDLE")
+						if(playermatch == "CANDLE"){
+							out.println("CORRECT");
 							JOptionPane.showMessageDialog(null, "CORRECT");
+						}
 						break;
 					default:
 						JOptionPane.showMessageDialog(null, "THERE IS SUMTHING WRONG");
 						break;
 				}
 		} else if(num2 == 11){
-			System.out.println("STRING: " + playermatch);
 				switch(num){
 					case 1:
 					case 5:
 					case 8:
-						if(playermatch == "YINYANG")
+						if(playermatch == "YINYANG"){
+							out.println("CORRECT");
 							JOptionPane.showMessageDialog(null, "CORRECT");
+						}
 						break;
 					case 2:
 					case 4:
 					case 9:
-						if(playermatch == "CHEESE")
+						if(playermatch == "CHEESE"){
+							out.println("CORRECT");
 							JOptionPane.showMessageDialog(null, "CORRECT");
+						}
 						break;
 					case 0:
 					case 10:
 					case 12 :
-						if(playermatch == "BULB")
+						if(playermatch == "BULB"){
+							out.println("CORRECT");
 							JOptionPane.showMessageDialog(null, "CORRECT");
+						}
 						break;
 					case 3:
 					case 6:
 					case 7:
-						if(playermatch == "LIPS")
+						if(playermatch == "LIPS"){
+							out.println("CORRECT");
 							JOptionPane.showMessageDialog(null, "CORRECT");
+						}
 						break;
 					default:
 						JOptionPane.showMessageDialog(null, "THERE IS SUMTHING WRONG");
 						break;
 				}
 		} else if(num2 == 12){
-			System.out.println("STRING: " + playermatch);
 				switch(num){
 					case 3:
 					case 4:
 					case 8:
-						if(playermatch == "TARGET")
+						if(playermatch == "TARGET"){
+							out.println("CORRECT");
 							JOptionPane.showMessageDialog(null, "CORRECT");
+						}
 						break;
 					case 0:
 					case 10:
 					case 11:
-						if(playermatch == "BULB")
+						if(playermatch == "BULB"){
+							out.println("CORRECT");
 							JOptionPane.showMessageDialog(null, "CORRECT");
+						}
 						break;
 					case 2:
 					case 5:
 					case 7 :
-						if(playermatch == "HAND")
+						if(playermatch == "HAND"){
+							out.println("CORRECT");
 							JOptionPane.showMessageDialog(null, "CORRECT");
+						}
 						break;
 					case 1:
 					case 6:
 					case 9:
-						if(playermatch == "SHADES")
+						if(playermatch == "SHADES"){
+							out.println("CORRECT");
 							JOptionPane.showMessageDialog(null, "CORRECT");
+						}
 						break;
 					default:
 						JOptionPane.showMessageDialog(null, "THERE IS SUMTHING WRONG");
 						break;
 				}
-		} else{
-				System.out.println("STRING: " + playermatch);
 		}
 	}
 
