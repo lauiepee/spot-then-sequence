@@ -69,6 +69,7 @@ public class seq_client extends JDialog{
     Calendar now = Calendar.getInstance();
     SimpleDateFormat formatter = new SimpleDateFormat("E yyyy.MM.dd 'at' hh:mm:ss a zzz");
     String color;
+    int num_server;
     int num2;
     
     /**
@@ -352,7 +353,6 @@ public class seq_client extends JDialog{
                         rightsymbol.addMouseListener(new MouseAdapter() {
                         	@Override
                         	public void mousePressed(MouseEvent e) {
-                				
                 				switch (num){
                 				case 0:
                 					playermatch = "DOLPHIN";
@@ -527,7 +527,8 @@ public class seq_client extends JDialog{
 
         // Make connection and initialize streams
         String serverAddress = getServerAddress();
-        Socket socket = new Socket(serverAddress, 9001);
+        @SuppressWarnings("resource")
+		Socket socket = new Socket(serverAddress, 9001);
         in = new BufferedReader(new InputStreamReader(
             socket.getInputStream()));
         out = new PrintWriter(socket.getOutputStream(), true);
@@ -549,8 +550,9 @@ public class seq_client extends JDialog{
             } else if (line.startsWith("SUBMITCOLOR")) {
                 color = getColor();
             } else if (line.startsWith("SERVER")) {
-                num2 = Integer.parseInt(line.substring(7));
-                System.out.println("PAGPASA SA CLIENT: " + num2);
+                num_server = Integer.parseInt(line.substring(7));
+                
+                num2 = num_server;
                 
                 JPanel panel_1 = new JPanel();
                 panel_1.setBounds(1004, 4, 229, 221);
@@ -559,8 +561,7 @@ public class seq_client extends JDialog{
                 JLabel lblNewLabel = new JLabel("");
                 lblNewLabel.setBounds(0, 5, 141, 216);
                 panel_1.add(lblNewLabel);
-                System.out.println("CHECK NATIN ANG VALUE NG NUM2: " + num2);
-                Image img2 = new ImageIcon(this.getClass().getResource(images[num2])).getImage();
+                Image img2 = new ImageIcon(this.getClass().getResource(images[num_server])).getImage();
                 lblNewLabel.setIcon(new ImageIcon(img2));
             } else if (line.startsWith("CORRECT")) {
                 messageArea_1.append(line.substring(8) + '\n');
@@ -569,8 +570,6 @@ public class seq_client extends JDialog{
     }
     
     private void matching(String playermatch, int num, int num2){
-    	Random rand = new Random();
-		int num3 = rand.nextInt(images.length-1) + 1;
 		if(num2 == 0){
 				switch(num){
 					case 1:

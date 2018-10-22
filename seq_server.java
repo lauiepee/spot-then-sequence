@@ -31,7 +31,7 @@ public class seq_server {
     /**
      * The port that the server listens on.
      */
-    private static final int PORT = 10;
+    private static final int PORT = 9001;
 
     /**
      * The set of all names of clients in the chat room.  Maintained
@@ -40,7 +40,6 @@ public class seq_server {
      */
     private static HashSet<String> names = new HashSet<String>();
 
-    private static HashSet<String> symb = new HashSet<String>();
 
     /**
      * The set of all the print writers for all the clients.  This
@@ -48,9 +47,7 @@ public class seq_server {
      */
     private static HashSet<PrintWriter> writers = new HashSet<PrintWriter>();
 
-    private static HashSet<PrintWriter> cardsymbols = new HashSet<PrintWriter>();
-
-    private static String[] symbols = {"a","b","c","d","e","f","g","h","i","j"}; 
+    private static int num2;
     /**
      * The appplication main method, which just listens on a port and
      * spawns handler threads.
@@ -58,6 +55,14 @@ public class seq_server {
     public static void main(String[] args) throws Exception {
         System.out.println("The chat server is running.");
         ServerSocket listener = new ServerSocket(PORT);
+        
+
+        String[] images = {"/a.png", "/b.png", "/c.png", "/d.png", "/e.png", "/f.png", "/g.png", "/h.png", "/i.png", "/j.png", "/k.png", "/l.png", "/m.png"};
+
+		Random rand2 = new Random();
+		num2 = rand2.nextInt(images.length-1) + 1;
+		System.out.println("FROM SERVER: " + num2);
+		
         try {
             while (true) {
                 new Handler(listener.accept()).start();
@@ -73,7 +78,7 @@ public class seq_server {
      * and broadcasting its messages.
      */
     private static class Handler extends Thread {
-        private String name, symbol;
+        private String name;
         private Socket socket;
         private BufferedReader in;
         private PrintWriter out;
@@ -119,11 +124,6 @@ public class seq_server {
                     }
                 }
                 
-                String[] images = {"/a.png", "/b.png", "/c.png", "/d.png", "/e.png", "/f.png", "/g.png", "/h.png", "/i.png", "/j.png", "/k.png", "/l.png", "/m.png"};
-
-        		Random rand2 = new Random();
-        		int num2 = rand2.nextInt(images.length-1) + 1;
-
         		out.println("SERVER " + num2);
 
                 // Now that a successful name has been chosen, add the
