@@ -58,7 +58,8 @@ public class seq_client extends JDialog{
     
     String[] symbols = {"a","b","c","d","e","f","g","h","i","j"};
     String[] images = {"/a.png", "/b.png", "/c.png", "/d.png", "/e.png", "/f.png", "/g.png", "/h.png", "/i.png", "/j.png", "/k.png", "/l.png", "/m.png"};
-	
+	String[] players = new String[10];
+    
     JPanel panel = new JPanel();
     JPanel panel_1 = new JPanel();
     JLabel topsymbol = new JLabel("");
@@ -71,14 +72,18 @@ public class seq_client extends JDialog{
     JTextField textField_1 = new JTextField(40);
     
     JLabel spotitcard = new JLabel("");
-    JTextArea messageArea_1 = new JTextArea(8, 40);
+    JTextArea messageArea_1 = new JTextArea(8, 30);
     Calendar now = Calendar.getInstance();
     SimpleDateFormat formatter = new SimpleDateFormat("E yyyy.MM.dd 'at' hh:mm:ss a zzz");
     String color;
     String playername;
     
     int num_server;
-    int num2;
+    int num2, i, j;
+
+    boolean ctr = true;
+
+	private String name;
     
     /**
      * Constructs the client by laying out the GUI and registering a
@@ -92,7 +97,7 @@ public class seq_client extends JDialog{
     	setTitle("Spot Then Sequence");
         setBounds(100, 100, 1251, 766);
         getContentPane().setLayout(null);
-        contentPanel.setBounds(0, 0, 1242, 710);
+        contentPanel.setBounds(0, 0, 1229, 710);
         contentPanel.setBackground(Color.DARK_GRAY);
         contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
         getContentPane().add(contentPanel);
@@ -122,14 +127,14 @@ public class seq_client extends JDialog{
         table.setRowHeight(70);
                 
         textField_1 = new JTextField();
-        textField_1.setBounds(739, 10, 260, 30);
+        textField_1.setBounds(739, 6, 260, 30);
         textField_1.setColumns(10);
         
         // Layout GUI
         textField_1.setEditable(false);
         
         JScrollPane scrollPane = new JScrollPane();
-        scrollPane.setBounds(739, 44, 260, 181);
+        scrollPane.setBounds(739, 40, 260, 185);
         
         scrollPane.setViewportView(messageArea_1);
         messageArea_1.setEditable(false);
@@ -139,6 +144,13 @@ public class seq_client extends JDialog{
         contentPanel.add(scrollPane);
         
         spotitlabels();
+        
+
+        panel_1.setBounds(1004, 6, 218, 219);
+        contentPanel.add(panel_1);
+        
+        cardserver.setBounds(0, 5, 141, 216);
+        panel_1.add(cardserver);
                         
         // Add Listeners
         textField_1.addActionListener(new ActionListener() {
@@ -179,7 +191,8 @@ public class seq_client extends JDialog{
                         count=1;
                     }
 
-                    if(count>=5){
+                    if(count >= 5){
+                    	JOptionPane.showMessageDialog(null, "YOU WON THE GAME!");
                         out.println("WINNER!");
                         //socket.close();
                     }
@@ -196,7 +209,8 @@ public class seq_client extends JDialog{
                         count=1;
                     }
 
-                    if(count>=5){
+                    if(count >= 5){
+                    	JOptionPane.showMessageDialog(null, "YOU WON THE GAME!");
                         out.println("WINNER!");
                         //socket.close();
                     }
@@ -249,53 +263,91 @@ public class seq_client extends JDialog{
         in = new BufferedReader(new InputStreamReader(
             socket.getInputStream()));
         out = new PrintWriter(socket.getOutputStream(), true);
-
+        
+        
         // Process all messages from server, according to the protocol.
         while (true) {
+            
             String line = in.readLine();
             if (line.startsWith("SUBMITNAME")) {
-                out.println(getName());
-            } else if (line.startsWith("NAMEACCEPTED")) {
+            	this.name = getName();
+                out.println(name);
+                System.out.println(name);
+            } 
+            
+            else if (line.startsWith("NAMEACCEPTED")) {
                 textField_1.setEditable(true);
                 JOptionPane.showMessageDialog(frame, "Welcome! Please wait for others to join the conversation...");
-            } else if (line.startsWith("MESSAGE")) {
+            
+            }
+            
+            else if (line.startsWith("PLAYERS")){
+            	String temp = line.substring(8);
+            	
+            	i = 0;
+            	temp = temp.replaceAll("\\[|\\]", ""); 
+            	temp = temp.replaceAll(",", "");
+            	
+            	StringTokenizer st = new StringTokenizer(temp);
+                while (st.hasMoreTokens()) {
+                	players[i] = st.nextToken();
+                    i++;
+                }
+                
+            }
+            
+            else if (line.startsWith("MESSAGE")) {
                 messageArea_1.append(line.substring(8) + '\n');
-            } else if (line.startsWith("SUBMITCOLOR")) {
+            } 
+            
+            else if (line.startsWith("SUBMITCOLOR")) {
                 color = getColor();
-            } else if (line.startsWith("SERVER")) {
+            } 
+            
+            else if (line.startsWith("SERVER")) {
                 num_server = Integer.parseInt(line.substring(7));
                 num2 = num_server;
-                               
-                panel_1.setBounds(1004, 4, 229, 221);
-                contentPanel.add(panel_1);
                 
-                cardserver.setBounds(0, 5, 141, 216);
-                panel_1.add(cardserver);
                 
                 Image img2 = new ImageIcon(this.getClass().getResource(images[num_server])).getImage();
                 cardserver.setIcon(new ImageIcon(img2));
-            } else if (line.startsWith("CORRECT")) {
-                messageArea_1.append(line.substring(8) + " gets the correct answer. \n");
+                
+            } 
+            
+            else if (line.startsWith("CORRECT")) {
+                messageArea_1.append("---------------\n" + line.substring(8) + " gets the correct answer. \n-----------------\n");
                 playername = line.substring(8);
                 
-                spotitlabels();
+                ctr = true;
                 
-                table.setEnabled(true);
                 table.addMouseListener(new java.awt.event.MouseAdapter() {
-                    @Override
-                     public void mouseClicked(java.awt.event.MouseEvent evt) {
-                        int row = table.rowAtPoint(evt.getPoint());
-                        int col = table.columnAtPoint(evt.getPoint());
-                        if (row >= 0 && col >= 0) {
-                            out.println(row+","+col);
-                            table.setValueAt(color,row,col);
-                        }
-                        hasWinner(table);
+					@Override
+                     public void mousePressed(java.awt.event.MouseEvent evt) {
+	                    	if(ctr == true && name.equals(playername)){
+		                        int row = table.rowAtPoint(evt.getPoint());
+		                        int col = table.columnAtPoint(evt.getPoint());
+		                        if (row >= 0 && col >= 0) {
+		                            out.println("COLOR" + row + "," + col + "," + color);
+		                            table.setValueAt(color,row,col);
+		                        }
+		                        ctr = false;
+	                    	}
                      }
                     });
                 
                 out.println("NEXT");
+            } 
+            
+            else if(line.startsWith("COLOR")){
+            	int row = Integer.parseInt(line.substring(5,6));
+            	int column = Integer.parseInt(line.substring(7,8));
+            	String curr_color = line.substring(9);
+            	
+            	table.setValueAt(curr_color, row, column);
+                hasWinner(table);
             }
+            
+            i++;
         }
     }
     
@@ -335,6 +387,7 @@ public class seq_client extends JDialog{
 						}
 						break;
 					default:
+						out.println("HMM");
 						JOptionPane.showMessageDialog(null, "THERE IS SUMTHING WRONG");
 						break;
 				}
@@ -373,6 +426,7 @@ public class seq_client extends JDialog{
 						}
 						break;
 					default:
+						out.println("HMM");
 						JOptionPane.showMessageDialog(null, "THERE IS SUMTHING WRONG");
 						break;
 				}
@@ -411,6 +465,7 @@ public class seq_client extends JDialog{
 						}
 						break;
 					default:
+						out.println("HMM");
 						JOptionPane.showMessageDialog(null, "THERE IS SUMTHING WRONG");
 						break;
 				}
@@ -449,6 +504,7 @@ public class seq_client extends JDialog{
 						}
 						break;
 					default:
+						out.println("HMM");
 						JOptionPane.showMessageDialog(null, "THERE IS SUMTHING WRONG");
 						break;
 				}
@@ -487,6 +543,7 @@ public class seq_client extends JDialog{
 						}
 						break;
 					default:
+						out.println("HMM");
 						JOptionPane.showMessageDialog(null, "THERE IS SUMTHING WRONG");
 						break;
 				}
@@ -525,6 +582,7 @@ public class seq_client extends JDialog{
 						}
 						break;
 					default:
+						out.println("HMM");
 						JOptionPane.showMessageDialog(null, "THERE IS SUMTHING WRONG");
 						break;
 				}
@@ -563,6 +621,7 @@ public class seq_client extends JDialog{
 						}
 						break;
 					default:
+						out.println("HMM");
 						JOptionPane.showMessageDialog(null, "THERE IS SUMTHING WRONG");
 						break;
 				}
@@ -601,6 +660,7 @@ public class seq_client extends JDialog{
 						}
 						break;
 					default:
+						out.println("HMM");
 						JOptionPane.showMessageDialog(null, "THERE IS SUMTHING WRONG");
 						break;
 				}
@@ -639,6 +699,7 @@ public class seq_client extends JDialog{
 						}
 						break;
 					default:
+						out.println("HMM");
 						JOptionPane.showMessageDialog(null, "THERE IS SUMTHING WRONG");
 						break;
 				}
@@ -677,6 +738,7 @@ public class seq_client extends JDialog{
 						}
 						break;
 					default:
+						out.println("HMM");
 						JOptionPane.showMessageDialog(null, "THERE IS SUMTHING WRONG");
 						break;
 				}
@@ -715,6 +777,7 @@ public class seq_client extends JDialog{
 						}
 						break;
 					default:
+						out.println("HMM");
 						JOptionPane.showMessageDialog(null, "THERE IS SUMTHING WRONG");
 						break;
 				}
@@ -753,6 +816,7 @@ public class seq_client extends JDialog{
 						}
 						break;
 					default:
+						out.println("HMM");
 						JOptionPane.showMessageDialog(null, "THERE IS SUMTHING WRONG");
 						break;
 				}
@@ -791,6 +855,7 @@ public class seq_client extends JDialog{
 						}
 						break;
 					default:
+						out.println("HMM");
 						JOptionPane.showMessageDialog(null, "THERE IS SUMTHING WRONG");
 						break;
 				}

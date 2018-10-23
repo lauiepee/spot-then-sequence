@@ -7,6 +7,9 @@ import java.net.Socket;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+
 /**
  * A multithreaded chat room server.  When a client connects the
  * server requests a screen name by sending the client the
@@ -50,6 +53,8 @@ public class seq_server {
     private static String[] images = {"/a.png", "/b.png", "/c.png", "/d.png", "/e.png", "/f.png", "/g.png", "/h.png", "/i.png", "/j.png", "/k.png", "/l.png", "/m.png"};
 
     private static int num2;
+    
+    private static JTable table = new JTable();
     /**
      * The appplication main method, which just listens on a port and
      * spawns handler threads.
@@ -98,6 +103,21 @@ public class seq_server {
          * broadcasts them.
          */
         public void run() {
+        	table.setModel(new DefaultTableModel(
+                    new Object[][] {
+                        {null, null, null, null, null, null, null, null, null, null},
+                        {null, null, null, null, null, null, null, null, null, null},
+                        {null, null, null, null, null, null, null, null, null, null},
+                        {null, null, null, null, null, null, null, null, null, null},
+                        {null, null, null, null, null, null, null, null, null, null},
+                        {null, null, null, null, null, null, null, null, null, null},
+                        {null, null, null, null, null, null, null, null, null, null},
+                        {null, null, null, null, null, null, null, null, null, null},
+                        {null, null, null, null, null, null, null, null, null, null},
+                        {null, null, null, null, null, null, null, null, null, null},
+                    }, new String[] { null, null, null, null, null, null, null, null, null, null}
+                    ));
+        	
             try {
 
                 // Create character streams for the socket.
@@ -137,14 +157,16 @@ public class seq_server {
                     }
                 }
                 
-                out.println("SERVER " + num2);
 
                 // Now that a successful name has been chosen, add the
                 // socket's print writer to the set of all writers so
                 // this client can receive broadcast messages.
-                out.println("NAMEACCEPTED");
+                //out.println("NAMEACCEPTED");
                 writers.add(out);
                 
+
+                out.println("SERVER " + num2);
+                out.println("PLAYERS " + names);
                 // Accept messages from this client and broadcast them.
                 // Ignore other clients that cannot be broadcasted to.
                 while (true) {
@@ -162,8 +184,16 @@ public class seq_server {
                             writer.println("CORRECT " + name);
                         }
                                                 
-                        if (input.startsWith("NEXT")){
+                        else if (input.startsWith("NEXT")){
                             writer.println("SERVER " + num2);
+                        }
+                        
+                        else if (input.startsWith("COLOR")){
+                        	int row = Integer.parseInt(input.substring(5,6));
+                        	int col = Integer.parseInt(input.substring(7,8));
+                        	String curr_color = input.substring(9);
+                        	
+	                        writer.println("COLOR" + row + "," + col + "," + curr_color);
                         }
                         
                         else{
