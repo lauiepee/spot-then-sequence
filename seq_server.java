@@ -39,7 +39,7 @@ public class seq_server {
      * already in use.
      */
     private static HashSet<String> names = new HashSet<String>();
-
+    private static HashSet<String> colors = new HashSet<String>();
 
     /**
      * The set of all the print writers for all the clients.  This
@@ -58,10 +58,10 @@ public class seq_server {
         System.out.println("The chat server is running.");
         ServerSocket listener = new ServerSocket(PORT);
         
-		Random rand2 = new Random();
-		num2 = rand2.nextInt(images.length-1) + 1;
-		System.out.println("FROM SERVER: " + num2);
-		
+        Random rand2 = new Random();
+        num2 = rand2.nextInt(images.length-1) + 1;
+        System.out.println("FROM SERVER: " + num2);
+        
         try {
             while (true) {
                 new Handler(listener.accept()).start();
@@ -77,7 +77,7 @@ public class seq_server {
      * and broadcasting its messages.
      */
     private static class Handler extends Thread {
-        private String name;
+        private String name,color;
         private Socket socket;
         private BufferedReader in;
         private PrintWriter out;
@@ -122,41 +122,55 @@ public class seq_server {
                         }
                     }
                 }
+
+                 while (true) {
+                    out.println("SUBMITCOLOR");
+                    color = in.readLine();
+                    if (color == null) {
+                        return;
+                    }
+                    synchronized (colors) {
+                        if (!colors.contains(color)) {
+                            colors.add(color);
+                            break;
+                        }
+                    }
+                }
                 
-        		out.println("SERVER " + num2);
+                out.println("SERVER " + num2);
 
                 // Now that a successful name has been chosen, add the
                 // socket's print writer to the set of all writers so
                 // this client can receive broadcast messages.
                 out.println("NAMEACCEPTED");
                 writers.add(out);
-        		
+                
                 // Accept messages from this client and broadcast them.
                 // Ignore other clients that cannot be broadcasted to.
                 while (true) {
                     String input = in.readLine();
                     
                     if (input == null) {
-                		return;
+                        return;
                     }
 
-            		Random rand2 = new Random();
-            		num2 = rand2.nextInt(images.length-1) + 1;
-            		
+                    Random rand2 = new Random();
+                    num2 = rand2.nextInt(images.length-1) + 1;
+                    
                     for (PrintWriter writer : writers) {
-                    	if (input.startsWith("CORRECT")){
-                        	writer.println("CORRECT " + name);
+                        if (input.startsWith("CORRECT")){
+                            writer.println("CORRECT " + name);
                         }
-                    	                    	
-                    	if (input.startsWith("NEXT")){
-                    		writer.println("SERVER " + num2);
-                    	}
+                                                
+                        if (input.startsWith("NEXT")){
+                            writer.println("SERVER " + num2);
+                        }
                         
-                    	else{
-                        	Calendar now = Calendar.getInstance();
-                        	SimpleDateFormat formatter = new SimpleDateFormat("E yyyy.MM.dd 'at' hh:mm:ss a zzz");
-                        	writer.println("MESSAGE " + name + ": " + input + "\t" + formatter.format(now.getTime()));
-                    	} 
+                        else{
+                            Calendar now = Calendar.getInstance();
+                            SimpleDateFormat formatter = new SimpleDateFormat("E yyyy.MM.dd 'at' hh:mm:ss a zzz");
+                            writer.println("MESSAGE " + name + ": " + input + "\t" + formatter.format(now.getTime()));
+                        } 
                     }
                 }
             } catch (IOException e) {
