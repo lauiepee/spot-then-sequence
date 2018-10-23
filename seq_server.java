@@ -47,6 +47,8 @@ public class seq_server {
      */
     private static HashSet<PrintWriter> writers = new HashSet<PrintWriter>();
 
+    private static String[] images = {"/a.png", "/b.png", "/c.png", "/d.png", "/e.png", "/f.png", "/g.png", "/h.png", "/i.png", "/j.png", "/k.png", "/l.png", "/m.png"};
+
     private static int num2;
     /**
      * The appplication main method, which just listens on a port and
@@ -56,9 +58,6 @@ public class seq_server {
         System.out.println("The chat server is running.");
         ServerSocket listener = new ServerSocket(PORT);
         
-
-        String[] images = {"/a.png", "/b.png", "/c.png", "/d.png", "/e.png", "/f.png", "/g.png", "/h.png", "/i.png", "/j.png", "/k.png", "/l.png", "/m.png"};
-
 		Random rand2 = new Random();
 		num2 = rand2.nextInt(images.length-1) + 1;
 		System.out.println("FROM SERVER: " + num2);
@@ -140,11 +139,18 @@ public class seq_server {
                     if (input == null) {
                 		return;
                     }
-                    
+
+            		Random rand2 = new Random();
+            		num2 = rand2.nextInt(images.length-1) + 1;
+            		
                     for (PrintWriter writer : writers) {
                     	if (input.startsWith("CORRECT")){
-                        	writer.println("CORRECT " + name + " gets the correct answer.");
+                        	writer.println("CORRECT " + name);
                         }
+                    	                    	
+                    	if (input.startsWith("NEXT")){
+                    		writer.println("SERVER " + num2);
+                    	}
                         
                     	else{
                         	Calendar now = Calendar.getInstance();

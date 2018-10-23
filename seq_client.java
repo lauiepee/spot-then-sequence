@@ -48,9 +48,6 @@ import javax.swing.ImageIcon;
  */
 public class seq_client extends JDialog{
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	String playermatch = "";
@@ -62,13 +59,24 @@ public class seq_client extends JDialog{
     String[] symbols = {"a","b","c","d","e","f","g","h","i","j"};
     String[] images = {"/a.png", "/b.png", "/c.png", "/d.png", "/e.png", "/f.png", "/g.png", "/h.png", "/i.png", "/j.png", "/k.png", "/l.png", "/m.png"};
 	
-    private final JPanel contentPanel = new JPanel();
-    private JTable table;
-    private JTextField textField_1 = new JTextField(40);
+    JPanel panel = new JPanel();
+    JPanel panel_1 = new JPanel();
+    JLabel topsymbol = new JLabel("");
+    JLabel leftsymbol = new JLabel("");
+    JLabel bottomsymbol = new JLabel("");
+    JLabel rightsymbol = new JLabel("");
+    JLabel cardserver = new JLabel("");
+    JPanel contentPanel = new JPanel();
+    JTable table = new JTable();
+    JTextField textField_1 = new JTextField(40);
+    
+    JLabel spotitcard = new JLabel("");
     JTextArea messageArea_1 = new JTextArea(8, 40);
     Calendar now = Calendar.getInstance();
     SimpleDateFormat formatter = new SimpleDateFormat("E yyyy.MM.dd 'at' hh:mm:ss a zzz");
     String color;
+    String playername;
+    
     int num_server;
     int num2;
     
@@ -89,24 +97,8 @@ public class seq_client extends JDialog{
         contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
         getContentPane().add(contentPanel);
 
-        Random rand = new Random();
-		int num = rand.nextInt(images.length-1) + 1;
-
-        table = new JTable();
-        table.addMouseListener(new java.awt.event.MouseAdapter() {
-            @Override
-             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                int row = table.rowAtPoint(evt.getPoint());
-                int col = table.columnAtPoint(evt.getPoint());
-                if (row >= 0 && col >= 0) {
-                    out.println(row+","+col);
-                    table.setValueAt(color,row,col);
-                }
-                hasWinner(table);
-             }
-            });
+        
         table.setBounds(6, 6, 727, 700);
-        table.setEnabled(false);
         table.setToolTipText("null\n");
         table.setRowSelectionAllowed(false);
         table.setColumnSelectionAllowed(false);
@@ -129,294 +121,24 @@ public class seq_client extends JDialog{
                 ));
         table.setRowHeight(70);
                 
-                textField_1 = new JTextField();
-                textField_1.setBounds(739, 10, 260, 30);
-                textField_1.setColumns(10);
-                
-                        // Layout GUI
-                        textField_1.setEditable(false);
-                        
-                        JScrollPane scrollPane = new JScrollPane();
-                        scrollPane.setBounds(739, 44, 260, 181);
-                        
-                        messageArea_1 = new JTextArea();
-                        scrollPane.setViewportView(messageArea_1);
-                        messageArea_1.setEditable(false);
-                        contentPanel.setLayout(null);
-                        contentPanel.add(table);
-                        contentPanel.add(textField_1);
-                        contentPanel.add(scrollPane);
-                        
-
-                        
-                        
-                        JPanel panel = new JPanel();
-                        panel.setBounds(739, 231, 483, 475);
-                        contentPanel.add(panel);
-                        panel.setLayout(null);
-                        Image img = new ImageIcon(this.getClass().getResource(images[num])).getImage();
-                        
-                        JLabel topsymbol = new JLabel("");
-                        topsymbol.addMouseListener(new MouseAdapter() {
-                        	@Override
-                        	public void mousePressed(MouseEvent arg0) {
-
-                				switch (num){
-                					case 0:
-                						playermatch = "TREE";
-                						matching(playermatch, num, num2);
-                						break;
-                					case 1:
-                						playermatch = "BALLOON";
-                						matching(playermatch, num, num2);
-                						break;
-                					case 2:
-                						playermatch = "HAND";
-                						matching(playermatch, num, num2);
-                						break;
-                					case 3:
-                						playermatch = "CANDLE";
-                						matching(playermatch, num, num2);
-                						break;
-                					case 4:
-                						playermatch = "TARGET";
-                						matching(playermatch, num, num2);
-                						break;
-                					case 5:
-                						playermatch = "ICE";
-                						matching(playermatch, num, num2);
-                						break;
-                					case 6:
-                						playermatch = "BOMB";
-                						matching(playermatch, num, num2);
-                						break;
-                					case 7:
-                						playermatch = "LIPS";
-                						matching(playermatch, num, num2);
-                						break;
-                					case 8:
-                						playermatch = "DOLPHIN";
-                						matching(playermatch, num, num2);
-                						break;
-                					case 9:
-                						playermatch = "SHADES";
-                						matching(playermatch, num, num2);
-                						break;
-                					case 10:
-                						playermatch = "BULB";
-                						matching(playermatch, num, num2);
-                						break;
-                					case 11:
-                						playermatch = "YINYANG";
-                						matching(playermatch, num, num2);
-                						break;
-                					case 12:
-                						playermatch = "TARGET";
-                						matching(playermatch, num, num2);
-                						break;
-                				}                        		
-                        	}
-                        });
-                        topsymbol.setBounds(177, 141, 78, 74);
-                        panel.add(topsymbol);
-                        
-                        JLabel leftsymbol = new JLabel("");
-                        leftsymbol.addMouseListener(new MouseAdapter() {
-                        	@Override
-                        	public void mousePressed(MouseEvent e) {
-                				
-                				switch (num){
-                				case 0:
-                					playermatch = "ICE";
-                					matching(playermatch, num, num2);
-                					break;
-                				case 1:
-                					playermatch = "YINYANG";
-                					matching(playermatch, num, num2);
-                					break;
-                				case 2:
-                					playermatch = "TREE";
-                					matching(playermatch, num, num2);
-                					break;
-                				case 3:
-                					playermatch = "LIPS";
-                					matching(playermatch, num, num2);
-                					break;
-                				case 4:
-                					playermatch = "CHEESE";
-                					matching(playermatch, num, num2);
-                					break;
-                				case 5:
-                					playermatch = "HAND";
-                					matching(playermatch, num, num2);
-                					break;
-                				case 6:
-                					playermatch = "SHADES";
-                					matching(playermatch, num, num2);
-                					break;
-                				case 7:
-                					playermatch = "DOLPHIN";
-                					matching(playermatch, num, num2);
-                					break;
-                				case 8:
-                					playermatch = "BOMB";
-                					matching(playermatch, num, num2);
-                					break;
-                				case 9:
-                					playermatch = "CANDLE";
-                					matching(playermatch, num, num2);
-                					break;
-                				case 10:
-                					playermatch = "BALLOON";
-                					matching(playermatch, num, num2);
-                					break;
-                				case 11:
-                					playermatch = "CHEESE";
-                					matching(playermatch, num, num2);
-                					break;
-                				case 12:
-                					playermatch = "BULB";
-                					matching(playermatch, num, num2);
-                					break;
-                			}
-                        		
-                        	}
-                        });
-                        leftsymbol.setBounds(128, 204, 69, 74);
-                        panel.add(leftsymbol);
-                        
-                        JLabel bottomsymbol = new JLabel("");
-                        bottomsymbol.addMouseListener(new MouseAdapter() {
-                        	@Override
-                        	public void mousePressed(MouseEvent e) {
-                				
-                				switch (num){
-                				case 0:
-                					playermatch = "BULB";
-                					matching(playermatch, num, num2);
-                					break;
-                				case 1:
-                					playermatch = "TREE";
-                					matching(playermatch, num, num2);
-                					break;
-                				case 2:
-                					playermatch = "BOMB";
-                					matching(playermatch, num, num2);
-                					break;
-                				case 3:
-                					playermatch = "TARGET";
-                					matching(playermatch, num, num2);
-                					break;
-                				case 4:
-                					playermatch = "BALLOON";
-                					matching(playermatch, num, num2);
-                					break;
-                				case 5:
-                					playermatch = "CANDLE";
-                					matching(playermatch, num, num2);
-                					break;
-                				case 6:
-                					playermatch = "ICE";
-                					matching(playermatch, num, num2);
-                					break;
-                				case 7:
-                					playermatch = "HAND";
-                					matching(playermatch, num, num2);
-                					break;
-                				case 8:
-                					playermatch = "YINYANG";
-                					matching(playermatch, num, num2);
-                					break;
-                				case 9:
-                					playermatch = "DOLPHIN";
-                					matching(playermatch, num, num2);
-                					break;
-                				case 10:
-                					playermatch = "CANDLE";
-                					matching(playermatch, num, num2);
-                					break;
-                				case 11:
-                					playermatch = "LIPS";
-                					matching(playermatch, num, num2);
-                					break;
-                				case 12:
-                					playermatch = "SHADES";
-                					matching(playermatch, num, num2);
-                					break;
-                				}
-                        	}
-                        });
-                        bottomsymbol.setBounds(177, 265, 78, 63);
-                        panel.add(bottomsymbol);
-                        
-                        JLabel rightsymbol = new JLabel("");
-                        rightsymbol.addMouseListener(new MouseAdapter() {
-                        	@Override
-                        	public void mousePressed(MouseEvent e) {
-                				switch (num){
-                				case 0:
-                					playermatch = "DOLPHIN";
-                					matching(playermatch, num, num2);
-                					break;
-                				case 1:
-                					playermatch = "SHADES";
-                					matching(playermatch, num, num2);
-                					break;
-                				case 2:
-                					playermatch = "CHEESE";
-                					matching(playermatch, num, num2);
-                					break;
-                				case 3:
-                					playermatch = "TREE";
-                					matching(playermatch, num, num2);
-                					break;
-                				case 4:
-                					playermatch = "ICE";
-                					matching(playermatch, num, num2);
-                					break;
-                				case 5:
-                					playermatch = "YINYANG";
-                					matching(playermatch, num, num2);
-                					break;
-                				case 6:
-                					playermatch = "LIPS";
-                					matching(playermatch, num, num2);
-                					break;
-                				case 7:
-                					playermatch = "BALLOON";
-                					matching(playermatch, num, num2);
-                					break;
-                				case 8:
-                					playermatch = "TARGET";
-                					matching(playermatch, num, num2);
-                					break;
-                				case 9:
-                					playermatch = "CHEESE";
-                					matching(playermatch, num, num2);
-                					break;
-                				case 10:
-                					playermatch = "BOMB";
-                					matching(playermatch, num, num2);
-                					break;
-                				case 11:
-                					playermatch = "BULB";
-                					matching(playermatch, num, num2);
-                					break;
-                				case 12:
-                					playermatch = "HAND";
-                					matching(playermatch, num, num2);
-                					break;
-                			}
-                        	}
-                        });
-                        rightsymbol.setBounds(232, 204, 78, 63);
-                        panel.add(rightsymbol);
-                        
-                        JLabel spotitcard = new JLabel("");
-                        spotitcard.setBounds(119, 141, 199, 197);
-                        panel.add(spotitcard);
-                        spotitcard.setIcon(new ImageIcon(img));
-                        
+        textField_1 = new JTextField();
+        textField_1.setBounds(739, 10, 260, 30);
+        textField_1.setColumns(10);
+        
+        // Layout GUI
+        textField_1.setEditable(false);
+        
+        JScrollPane scrollPane = new JScrollPane();
+        scrollPane.setBounds(739, 44, 260, 181);
+        
+        scrollPane.setViewportView(messageArea_1);
+        messageArea_1.setEditable(false);
+        contentPanel.setLayout(null);
+        contentPanel.add(table);
+        contentPanel.add(textField_1);
+        contentPanel.add(scrollPane);
+        
+        spotitlabels();
                         
         // Add Listeners
         textField_1.addActionListener(new ActionListener() {
@@ -444,6 +166,7 @@ public class seq_client extends JDialog{
         });
     }
 
+    // For Sequence
     private void hasWinner(JTable table){
         int count;
            //vertical
@@ -506,12 +229,6 @@ public class seq_client extends JDialog{
             JOptionPane.PLAIN_MESSAGE);
     }
 
-    private String getCardSymbol() {
-        Random r = new Random();
-        int rand_num_client = r.nextInt(((symbols.length-1) - 0) + 1) + 0;
-
-        return symbols[rand_num_client];
-    }
 
     public String getColor() {
         return JOptionPane.showInputDialog(
@@ -541,30 +258,43 @@ public class seq_client extends JDialog{
             } else if (line.startsWith("NAMEACCEPTED")) {
                 textField_1.setEditable(true);
                 JOptionPane.showMessageDialog(frame, "Welcome! Please wait for others to join the conversation...");
-            } else if (line.startsWith("SYMBOLS")) {
-                out.println(getCardSymbol());
-                JOptionPane.showMessageDialog(frame, getCardSymbol());
-                messageArea_1.append(line + '\n');
             } else if (line.startsWith("MESSAGE")) {
                 messageArea_1.append(line.substring(8) + '\n');
             } else if (line.startsWith("SUBMITCOLOR")) {
                 color = getColor();
             } else if (line.startsWith("SERVER")) {
                 num_server = Integer.parseInt(line.substring(7));
-                
                 num2 = num_server;
-                
-                JPanel panel_1 = new JPanel();
+                               
                 panel_1.setBounds(1004, 4, 229, 221);
                 contentPanel.add(panel_1);
-        
-                JLabel lblNewLabel = new JLabel("");
-                lblNewLabel.setBounds(0, 5, 141, 216);
-                panel_1.add(lblNewLabel);
+                
+                cardserver.setBounds(0, 5, 141, 216);
+                panel_1.add(cardserver);
+                
                 Image img2 = new ImageIcon(this.getClass().getResource(images[num_server])).getImage();
-                lblNewLabel.setIcon(new ImageIcon(img2));
+                cardserver.setIcon(new ImageIcon(img2));
             } else if (line.startsWith("CORRECT")) {
-                messageArea_1.append(line.substring(8) + '\n');
+                messageArea_1.append(line.substring(8) + " gets the correct answer. \n");
+                playername = line.substring(8);
+                
+                spotitlabels();
+                
+                table.setEnabled(true);
+                table.addMouseListener(new java.awt.event.MouseAdapter() {
+                    @Override
+                     public void mouseClicked(java.awt.event.MouseEvent evt) {
+                        int row = table.rowAtPoint(evt.getPoint());
+                        int col = table.columnAtPoint(evt.getPoint());
+                        if (row >= 0 && col >= 0) {
+                            out.println(row+","+col);
+                            table.setValueAt(color,row,col);
+                        }
+                        hasWinner(table);
+                     }
+                    });
+                
+                out.println("NEXT");
             }
         }
     }
@@ -1066,6 +796,342 @@ public class seq_client extends JDialog{
 				}
 		}
 	}
+    
+    private void topsymcheck(int num){
+    	switch (num){
+			case 0:
+				out.println("TREE");
+				playermatch = "TREE";
+				matching(playermatch, num, num2);
+				break;
+			case 1:
+				out.println("BALLOON");
+				playermatch = "BALLOON";
+				matching(playermatch, num, num2);
+				break;
+			case 2:
+				out.println("HAND");
+				playermatch = "HAND";
+				matching(playermatch, num, num2);
+				break;
+			case 3:
+				out.println("CANDLE");
+				playermatch = "CANDLE";
+				matching(playermatch, num, num2);
+				break;
+			case 4:
+				out.println("TARGET");
+				playermatch = "TARGET";
+				matching(playermatch, num, num2);
+				break;
+			case 5:
+				out.println("ICE");
+				playermatch = "ICE";
+				matching(playermatch, num, num2);
+				break;
+			case 6:
+				out.println("BOMB");
+				playermatch = "BOMB";
+				matching(playermatch, num, num2);
+				break;
+			case 7:
+				out.println("LIPS");
+				playermatch = "LIPS";
+				matching(playermatch, num, num2);
+				break;
+			case 8:
+				out.println("DOLPHIN");
+				playermatch = "DOLPHIN";
+				matching(playermatch, num, num2);
+				break;
+			case 9:
+				out.println("SHADES");
+				playermatch = "SHADES";
+				matching(playermatch, num, num2);
+				break;
+			case 10:
+				out.println("BULB");
+				playermatch = "BULB";
+				matching(playermatch, num, num2);
+				break;
+			case 11:
+				out.println("YINYANG");
+				playermatch = "YINYANG";
+				matching(playermatch, num, num2);
+				break;
+			case 12:
+				out.println("TARGET");
+				playermatch = "TARGET";
+				matching(playermatch, num, num2);
+				break;
+		} 
+    }
+    
+    private void leftsymcheck(int num){
+		switch (num){
+			case 0:
+				out.println("ICE");
+				playermatch = "ICE";
+				matching(playermatch, num, num2);
+				break;
+			case 1:
+				out.println("YINYANG");
+				playermatch = "YINYANG";
+				matching(playermatch, num, num2);
+				break;
+			case 2:
+				out.println("TREE");
+				playermatch = "TREE";
+				matching(playermatch, num, num2);
+				break;
+			case 3:
+				out.println("LIPS");
+				playermatch = "LIPS";
+				matching(playermatch, num, num2);
+				break;
+			case 4:
+				out.println("CHEESE");
+				playermatch = "CHEESE";
+				matching(playermatch, num, num2);
+				break;
+			case 5:
+				out.println("HAND");
+				playermatch = "HAND";
+				matching(playermatch, num, num2);
+				break;
+			case 6:
+				out.println("SHADES");
+				playermatch = "SHADES";
+				matching(playermatch, num, num2);
+				break;
+			case 7:
+				out.println("DOLPHIN");
+				playermatch = "DOLPHIN";
+				matching(playermatch, num, num2);
+				break;
+			case 8:
+				out.println("BOMB");
+				playermatch = "BOMB";
+				matching(playermatch, num, num2);
+				break;
+			case 9:
+				out.println("CANDLE");
+				playermatch = "CANDLE";
+				matching(playermatch, num, num2);
+				break;
+			case 10:
+				out.println("BALLOON");
+				playermatch = "BALLOON";
+				matching(playermatch, num, num2);
+				break;
+			case 11:
+				out.println("CHEESE");
+				playermatch = "CHEESE";
+				matching(playermatch, num, num2);
+				break;
+			case 12:
+				out.println("BULB");
+				playermatch = "BULB";
+				matching(playermatch, num, num2);
+				break;
+		}
+    }
+    
+    private void bottomsymcheck(int num){
+		switch (num){
+			case 0:
+				out.println("BULB");
+				playermatch = "BULB";
+				matching(playermatch, num, num2);
+				break;
+			case 1:
+				out.println("TREE");
+				playermatch = "TREE";
+				matching(playermatch, num, num2);
+				break;
+			case 2:
+				out.println("BOMB");
+				playermatch = "BOMB";
+				matching(playermatch, num, num2);
+				break;
+			case 3:
+				out.println("TARGET");
+				playermatch = "TARGET";
+				matching(playermatch, num, num2);
+				break;
+			case 4:
+				out.println("BALLOON");
+				playermatch = "BALLOON";
+				matching(playermatch, num, num2);
+				break;
+			case 5:
+				out.println("CANDLE");
+				playermatch = "CANDLE";
+				matching(playermatch, num, num2);
+				break;
+			case 6:
+				out.println("ICE");
+				playermatch = "ICE";
+				matching(playermatch, num, num2);
+				break;
+			case 7:
+				out.println("HAND");
+				playermatch = "HAND";
+				matching(playermatch, num, num2);
+				break;
+			case 8:
+				out.println("YINYANG");
+				playermatch = "YINYANG";
+				matching(playermatch, num, num2);
+				break;
+			case 9:
+				out.println("DOLPHIN");
+				playermatch = "DOLPHIN";
+				matching(playermatch, num, num2);
+				break;
+			case 10:
+				out.println("CANDLE");
+				playermatch = "CANDLE";
+				matching(playermatch, num, num2);
+				break;
+			case 11:
+				out.println("LIPS");
+				playermatch = "LIPS";
+				matching(playermatch, num, num2);
+				break;
+			case 12:
+				out.println("SHADES");
+				playermatch = "SHADES";
+				matching(playermatch, num, num2);
+				break;
+		}
+    }
+    
+    private void rightsymcheck(int num){
+    	switch (num){
+	    	case 0:
+				out.println("DOLPHIN");
+				playermatch = "DOLPHIN";
+				matching(playermatch, num, num2);
+				break;
+			case 1:
+				out.println("SHADES");
+				playermatch = "SHADES";
+				matching(playermatch, num, num2);
+				break;
+			case 2:
+				out.println("CHEESE");
+				playermatch = "CHEESE";
+				matching(playermatch, num, num2);
+				break;
+			case 3:
+				out.println("TREE");
+				playermatch = "TREE";
+				matching(playermatch, num, num2);
+				break;
+			case 4:
+				out.println("ICE");
+				playermatch = "ICE";
+				matching(playermatch, num, num2);
+				break;
+			case 5:
+				out.println("YINYANG");
+				playermatch = "YINYANG";
+				matching(playermatch, num, num2);
+				break;
+			case 6:
+				out.println("LIPS");
+				playermatch = "LIPS";
+				matching(playermatch, num, num2);
+				break;
+			case 7:
+				out.println("BALLOON");
+				playermatch = "BALLOON";
+				matching(playermatch, num, num2);
+				break;
+			case 8:
+				out.println("TARGET");
+				playermatch = "TARGET";
+				matching(playermatch, num, num2);
+				break;
+			case 9:
+				out.println("CHEESE");
+				playermatch = "CHEESE";
+				matching(playermatch, num, num2);
+				break;
+			case 10:
+				out.println("BOMB");
+				playermatch = "BOMB";
+				matching(playermatch, num, num2);
+				break;
+			case 11:
+				out.println("BULB");
+				playermatch = "BULB";
+				matching(playermatch, num, num2);
+				break;
+			case 12:
+				out.println("HAND");
+				playermatch = "HAND";
+				matching(playermatch, num, num2);
+				break;
+		}
+    }
+    
+    private void spotitlabels(){
+
+        Random rand = new Random();
+		int num = rand.nextInt(images.length-1) + 1;
+    	
+		System.out.println("PASSED NUM: " + num);
+		
+    	// For the spot it card
+        panel.setBounds(739, 231, 483, 475);
+        contentPanel.add(panel);
+        panel.setLayout(null);
+        Image img = new ImageIcon(this.getClass().getResource(images[num])).getImage();
+        
+        topsymbol.addMouseListener(new MouseAdapter() {
+        	@Override
+        	public void mousePressed(MouseEvent arg0) {
+        		topsymcheck(num);
+        	}
+        });
+        topsymbol.setBounds(177, 141, 78, 74);
+        panel.add(topsymbol);
+        
+        leftsymbol.addMouseListener(new MouseAdapter() {
+        	@Override
+        	public void mousePressed(MouseEvent e) {
+				leftsymcheck(num);                        		
+        	}
+        });
+        leftsymbol.setBounds(128, 204, 69, 74);
+        panel.add(leftsymbol);
+        
+        
+        bottomsymbol.addMouseListener(new MouseAdapter() {
+        	@Override
+        	public void mousePressed(MouseEvent e) {
+				bottomsymcheck(num);
+        	}
+        });
+        bottomsymbol.setBounds(177, 265, 78, 63);
+        panel.add(bottomsymbol);
+        
+        rightsymbol.addMouseListener(new MouseAdapter() {
+        	@Override
+        	public void mousePressed(MouseEvent e) {
+				rightsymcheck(num);
+        	}
+        });
+        rightsymbol.setBounds(232, 204, 78, 63);
+        panel.add(rightsymbol);
+        
+        spotitcard.setBounds(119, 141, 199, 197);
+        panel.add(spotitcard);
+        spotitcard.setIcon(new ImageIcon(img));
+        // End of of for spot it card     
+    }
 
     /**
      * Runs the client as an application with a closeable frame.
