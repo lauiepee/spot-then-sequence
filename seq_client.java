@@ -212,6 +212,20 @@ public class seq_client extends JDialog{
             }
 
             //diagonal
+            for (int row=0; row<6; row++){
+                for (int col=0; col<6; col++){
+                    if( (table.getModel().getValueAt(row,col) != null) && (table.getModel().getValueAt(row,col) == table.getModel().getValueAt(row+1,col+1)) ){
+                        count++;
+                    }
+
+                    if(count == 4){
+                        JOptionPane.showMessageDialog(null, "YOU WON THE GAME!");
+                        out.println("WINNER!");
+                        //socket.close();
+                    }
+                }
+            }
+
     } 
 
     /**
