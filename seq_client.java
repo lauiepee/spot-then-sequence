@@ -179,53 +179,42 @@ public class seq_client extends JDialog{
     }
 
     // For Sequence
-    private void hasWinner(JTable table){
-        int count=0;
+    private void hasWinner(String color, JTable table){
+        int vcount = 0, hcount = 0, dcount = 0;
            //vertical
-            for (int col=0;col<10;col++){
-                for (int row=0; row<6;row++){
-                    if( (table.getModel().getValueAt(row,col) != null) && (table.getModel().getValueAt(row,col) == table.getModel().getValueAt(row+1,col)) ){
-                        count++;
-                    }
-
-                    if(count == 4){
-                        JOptionPane.showMessageDialog(null, "YOU WON THE GAME!");
-                        out.println("WINNER!");
-                        //socket.close();
+            for (int col = 0; col < 10; col++){
+                for (int row = 0; row < 10; row++){
+                	if( (table.getValueAt(row,col) != null) && (table.getValueAt(row,col).toString().equals(color))){
+                    	if (table.getValueAt(row,col).equals(table.getValueAt(row+1,col)))
+                    		vcount++;
                     }
                 }
             }
 
             //horizontal
-            for (int row=0; row<10; row++){
-                for (int col=0; col<6; col++){
-                    if( (table.getModel().getValueAt(row,col) != null) && (table.getModel().getValueAt(row,col) == table.getModel().getValueAt(row,col+1)) ){
-                        count++;
-                    }
-
-                    if(count == 4){
-                        JOptionPane.showMessageDialog(null, "YOU WON THE GAME!");
-                        out.println("WINNER!");
-                        //socket.close();
+            for (int row = 0; row < 10; row++){
+                for (int col = 0; col < 10; col++){
+                    if( (table.getValueAt(row,col) != null) && (table.getValueAt(row,col).toString().equals(color))){
+                    	if (table.getValueAt(row,col).equals(table.getValueAt(row,col+1)))
+                    		hcount++;
                     }
                 }
             }
 
             //diagonal
-            for (int row=0; row<6; row++){
-                for (int col=0; col<6; col++){
-                    if( (table.getModel().getValueAt(row,col) != null) && (table.getModel().getValueAt(row,col) == table.getModel().getValueAt(row+1,col+1)) ){
-                        count++;
-                    }
-
-                    if(count == 4){
-                        JOptionPane.showMessageDialog(null, "YOU WON THE GAME!");
-                        out.println("WINNER!");
-                        //socket.close();
+            for (int row = 0; row < 10; row++){
+                for (int col = 0; col < 10; col++){
+                	if( (table.getValueAt(row,col) != null) && (table.getValueAt(row,col).toString().equals(color))){
+                    	if (table.getValueAt(row,col).equals(table.getValueAt(row+1,col+1)))
+                    		dcount++;
                     }
                 }
             }
-
+            
+            if(hcount == 4 || vcount == 4 || dcount == 4){
+                JOptionPane.showMessageDialog(null, "YOU WON THE GAME!");
+                out.println("WINNER!");
+            }
     } 
 
     /**
@@ -279,7 +268,6 @@ public class seq_client extends JDialog{
             if (line.startsWith("SUBMITNAME")) {
                 this.name = getName();
                 out.println(name);
-                System.out.println(name);
             } 
             
             else if (line.startsWith("NAMEACCEPTED")) {
@@ -308,7 +296,7 @@ public class seq_client extends JDialog{
             } 
             
             else if (line.startsWith("SUBMITCOLOR")) {
-                color = getColor();
+                this.color = getColor();
             } 
             
             else if (line.startsWith("SERVER")) {
@@ -333,9 +321,9 @@ public class seq_client extends JDialog{
                                 int row = table.rowAtPoint(evt.getPoint());
                                 int col = table.columnAtPoint(evt.getPoint());
                                 if (row >= 0 && col >= 0) {
-                                    //out.println("COLOR" + row + "," + col + "," + color);
                                     table.setValueAt(color,row,col);
-                                    hasWinner(table);
+                                    out.println("COLOR" + row + "," + col + "," + color);
+                                    //hasWinner(color, table);
                                 }
                                 ctr = false;
 
@@ -352,8 +340,10 @@ public class seq_client extends JDialog{
                 int column = Integer.parseInt(line.substring(7,8));
                 String curr_color = line.substring(9);
                 
+                System.out.println("CURR COLOR: " + curr_color);
+                System.out.println("THIS COLOR: " + color);
                 table.setValueAt(curr_color, row, column);
-                hasWinner(table);
+                hasWinner(color, table);
             }
             
             i++;
