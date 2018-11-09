@@ -20,6 +20,7 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.Color;
+import java.awt.Font;
 import javax.swing.JTable;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
@@ -29,6 +30,9 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
+
+import javax.swing.table.DefaultTableCellRenderer;
+import java.awt.Component;
 
 /**
  * A simple Swing-based client for the chat server.  Graphically
@@ -59,6 +63,7 @@ public class seq_client extends JDialog{
     String[] symbols = {"a","b","c","d","e","f","g","h","i","j"};
     String[] images = {"/a.png", "/b.png", "/c.png", "/d.png", "/e.png", "/f.png", "/g.png", "/h.png", "/i.png", "/j.png", "/k.png", "/l.png", "/m.png"};
     String[] players = new String[10];
+    String[] chips = {"/blue.png", "/green.png", "/pink.png", "/white.png", "/orange.png", "/red.png"};
     
     JPanel panel = new JPanel();
     JPanel panel_1 = new JPanel();
@@ -77,6 +82,7 @@ public class seq_client extends JDialog{
     SimpleDateFormat formatter = new SimpleDateFormat("E yyyy.MM.dd 'at' hh:mm:ss a zzz");
     String color;
     String playername;
+    JLabel a1;
     
     int num_server;
     int num2, i, j;
@@ -101,30 +107,6 @@ public class seq_client extends JDialog{
         contentPanel.setBackground(Color.DARK_GRAY);
         contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
         getContentPane().add(contentPanel);
-
-        
-        table.setBounds(6, 6, 727, 700);
-        table.setToolTipText("null\n");
-        table.setRowSelectionAllowed(false);
-        table.setColumnSelectionAllowed(false);
-        table.setForeground(Color.WHITE);
-        table.setBorder(new LineBorder(new Color(0, 255, 255), 3));
-        table.setBackground(Color.DARK_GRAY);
-        table.setModel(new DefaultTableModel(
-                new Object[][] {
-                    {null, null, null, null, null, null, null, null, null, null},
-                    {null, null, null, null, null, null, null, null, null, null},
-                    {null, null, null, null, null, null, null, null, null, null},
-                    {null, null, null, null, null, null, null, null, null, null},
-                    {null, null, null, null, null, null, null, null, null, null},
-                    {null, null, null, null, null, null, null, null, null, null},
-                    {null, null, null, null, null, null, null, null, null, null},
-                    {null, null, null, null, null, null, null, null, null, null},
-                    {null, null, null, null, null, null, null, null, null, null},
-                    {null, null, null, null, null, null, null, null, null, null},
-                }, new String[] { null, null, null, null, null, null, null, null, null, null}
-                ));
-        table.setRowHeight(70);
                 
         textField_1 = new JTextField();
         textField_1.setBounds(739, 6, 260, 30);
@@ -139,7 +121,11 @@ public class seq_client extends JDialog{
         scrollPane.setViewportView(messageArea_1);
         messageArea_1.setEditable(false);
         contentPanel.setLayout(null);
-        contentPanel.add(table);
+        
+        a1 = new JLabel("");
+        a1.setBounds(79, 6, 72, 71);
+        contentPanel.add(a1);
+        a1.setEnabled(false);
         contentPanel.add(textField_1);
         contentPanel.add(scrollPane);
         
@@ -151,6 +137,33 @@ public class seq_client extends JDialog{
         
         cardserver.setBounds(0, 5, 141, 216);
         panel_1.add(cardserver);
+        
+                
+                table.setBounds(6, 6, 727, 700);
+                table.setToolTipText("null\n");
+                table.setRowSelectionAllowed(false);
+                table.setColumnSelectionAllowed(false);
+                table.setForeground(Color.WHITE);
+                table.setBorder(new LineBorder(new Color(0, 255, 255), 3));
+                table.setBackground(Color.DARK_GRAY);
+                table.setModel(new DefaultTableModel(
+                        new Object[][] {
+                            {null, null, null, null, null, null, null, null, null, null},
+                            {null, null, null, null, null, null, null, null, null, null},
+                            {null, null, null, null, null, null, null, null, null, null},
+                            {null, null, null, null, null, null, null, null, null, null},
+                            {null, null, null, null, null, null, null, null, null, null},
+                            {null, null, null, null, null, null, null, null, null, null},
+                            {null, null, null, null, null, null, null, null, null, null},
+                            {null, null, null, null, null, null, null, null, null, null},
+                            {null, null, null, null, null, null, null, null, null, null},
+                            {null, null, null, null, null, null, null, null, null, null},
+                        }, new String[] { null, null, null, null, null, null, null, null, null, null}
+                        ));
+                table.setRowHeight(70);
+                //table.setFont(new Font("Serif", Font.BOLD, 50));
+                contentPanel.add(table);
+
                         
         // Add Listeners
         textField_1.addActionListener(new ActionListener() {
@@ -184,9 +197,9 @@ public class seq_client extends JDialog{
            //vertical
             for (int col = 0; col < 10; col++){
                 for (int row = 0; row < 10; row++){
-                	if( (table.getValueAt(row,col) != null) && (table.getValueAt(row,col).toString().equals(color))){
-                    	if (table.getValueAt(row,col).equals(table.getValueAt(row+1,col)))
-                    		vcount++;
+                    if( (table.getValueAt(row,col) != null) && (table.getValueAt(row,col).toString().equals(color))){
+                        if (table.getValueAt(row,col).equals(table.getValueAt(row+1,col)))
+                            vcount++;
                     }
                 }
             }
@@ -195,8 +208,8 @@ public class seq_client extends JDialog{
             for (int row = 0; row < 10; row++){
                 for (int col = 0; col < 10; col++){
                     if( (table.getValueAt(row,col) != null) && (table.getValueAt(row,col).toString().equals(color))){
-                    	if (table.getValueAt(row,col).equals(table.getValueAt(row,col+1)))
-                    		hcount++;
+                        if (table.getValueAt(row,col).equals(table.getValueAt(row,col+1)))
+                            hcount++;
                     }
                 }
             }
@@ -204,9 +217,9 @@ public class seq_client extends JDialog{
             //diagonal
             for (int row = 0; row < 10; row++){
                 for (int col = 0; col < 10; col++){
-                	if( (table.getValueAt(row,col) != null) && (table.getValueAt(row,col).toString().equals(color))){
-                    	if (table.getValueAt(row,col).equals(table.getValueAt(row+1,col+1)))
-                    		dcount++;
+                    if( (table.getValueAt(row,col) != null) && (table.getValueAt(row,col).toString().equals(color))){
+                        if (table.getValueAt(row,col).equals(table.getValueAt(row+1,col+1)))
+                            dcount++;
                     }
                 }
             }
@@ -243,10 +256,12 @@ public class seq_client extends JDialog{
     public String getColor() {
         return JOptionPane.showInputDialog(
             frame,
-            "Choose a color: \n (blue, pink, red, green, white, orange)",
+            "Choose a color: \n (red, green, blue, pink, orange, yellow)",
             "Screen name selection",
             JOptionPane.PLAIN_MESSAGE);
     }
+
+
     /**
      * Connects to the server then enters the processing loop.
      */
@@ -323,6 +338,11 @@ public class seq_client extends JDialog{
                                 if (row >= 0 && col >= 0) {
                                     table.setValueAt(color,row,col);
                                     out.println("COLOR" + row + "," + col + "," + color);
+                                    if (row == 0 && col == 1) {
+                                        a1.setIcon(new ImageIcon("blue.png"));
+                                        a1.setEnabled(true);
+
+                                    }
                                     //hasWinner(color, table);
                                 }
                                 ctr = false;
@@ -342,6 +362,30 @@ public class seq_client extends JDialog{
                 
                 System.out.println("CURR COLOR: " + curr_color);
                 System.out.println("THIS COLOR: " + color);
+                /*if (curr_color.equalsIgnoreCase("red")){
+                    table.setForeground(Color.RED);
+                }else if (curr_color.equalsIgnoreCase("green")){
+                    table.setForeground(Color.GREEN);
+                }else if (curr_color.equalsIgnoreCase("blue")){
+                    table.setForeground(Color.BLUE);
+                }else if (curr_color.equalsIgnoreCase("magenta")){
+                    table.setForeground(Color.MAGENTA);
+                }else if (curr_color.equalsIgnoreCase("orange")){
+                    table.setForeground(Color.ORANGE);
+                }else if (curr_color.equalsIgnoreCase("white")){
+                    table.setForeground(Color.WHITE);
+                }*/
+                table.getColumnModel().getColumn(0).setCellRenderer(new CustomRenderer());
+                table.getColumnModel().getColumn(1).setCellRenderer(new CustomRenderer());
+                table.getColumnModel().getColumn(2).setCellRenderer(new CustomRenderer());
+                table.getColumnModel().getColumn(3).setCellRenderer(new CustomRenderer());
+                table.getColumnModel().getColumn(4).setCellRenderer(new CustomRenderer());
+                table.getColumnModel().getColumn(5).setCellRenderer(new CustomRenderer());
+                table.getColumnModel().getColumn(6).setCellRenderer(new CustomRenderer());
+                table.getColumnModel().getColumn(7).setCellRenderer(new CustomRenderer());
+                table.getColumnModel().getColumn(8).setCellRenderer(new CustomRenderer());
+                table.getColumnModel().getColumn(9).setCellRenderer(new CustomRenderer());
+
                 table.setValueAt(curr_color, row, column);
                 hasWinner(color, table);
             }
@@ -349,6 +393,33 @@ public class seq_client extends JDialog{
             i++;
         }
     }
+
+class CustomRenderer extends DefaultTableCellRenderer 
+{
+private static final long serialVersionUID = 6703872492730589499L;
+
+    public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column)
+    {
+        Component cellComponent = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+        value = table.getModel().getValueAt(row, column);
+
+        if(value.toString().equalsIgnoreCase("blue")){
+            cellComponent.setBackground(Color.BLUE);
+        } else if (value.toString().equalsIgnoreCase("red")){
+            cellComponent.setBackground(Color.RED);
+        } else if (value.toString().equalsIgnoreCase("green")){
+            cellComponent.setBackground(Color.GREEN);
+        } else if (value.toString().equalsIgnoreCase("PINK")){
+            cellComponent.setBackground(Color.MAGENTA);
+        } else if (value.toString().equalsIgnoreCase("ORANGE")){
+            cellComponent.setBackground(Color.ORANGE);
+        } else if (value.toString().equalsIgnoreCase("YELLOW")){
+            cellComponent.setBackground(Color.YELLOW);
+        }
+        return cellComponent;
+        
+    }
+}
     
     private void matching(String playermatch, int num, int num2){
         if(num2 == 0){
@@ -1193,7 +1264,7 @@ public class seq_client extends JDialog{
         spotitcard.setBounds(119, 141, 199, 197);
         panel.add(spotitcard);
         spotitcard.setIcon(new ImageIcon(img));
-        // End of of for spot it card     
+        // End of if for spot it card     
     }
 
     /**
