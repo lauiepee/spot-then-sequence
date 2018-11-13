@@ -84,7 +84,7 @@ public class seq_client extends JDialog{
     String playername;
     JLabel a1;
     
-    int num_server;
+    int num_server, num;
     int num2, i, j;
 
     boolean ctr = true;
@@ -129,6 +129,7 @@ public class seq_client extends JDialog{
         contentPanel.add(textField_1);
         contentPanel.add(scrollPane);
         
+        num = randnumclient();
         spotitlabels();
         
 
@@ -139,30 +140,30 @@ public class seq_client extends JDialog{
         panel_1.add(cardserver);
         
                 
-                table.setBounds(6, 6, 727, 700);
-                table.setToolTipText("null\n");
-                table.setRowSelectionAllowed(false);
-                table.setColumnSelectionAllowed(false);
-                table.setForeground(Color.WHITE);
-                table.setBorder(new LineBorder(new Color(0, 255, 255), 3));
-                table.setBackground(Color.DARK_GRAY);
-                table.setModel(new DefaultTableModel(
-                        new Object[][] {
-                            {null, null, null, null, null, null, null, null, null, null},
-                            {null, null, null, null, null, null, null, null, null, null},
-                            {null, null, null, null, null, null, null, null, null, null},
-                            {null, null, null, null, null, null, null, null, null, null},
-                            {null, null, null, null, null, null, null, null, null, null},
-                            {null, null, null, null, null, null, null, null, null, null},
-                            {null, null, null, null, null, null, null, null, null, null},
-                            {null, null, null, null, null, null, null, null, null, null},
-                            {null, null, null, null, null, null, null, null, null, null},
-                            {null, null, null, null, null, null, null, null, null, null},
-                        }, new String[] { null, null, null, null, null, null, null, null, null, null}
-                        ));
-                table.setRowHeight(70);
-                //table.setFont(new Font("Serif", Font.BOLD, 50));
-                contentPanel.add(table);
+        table.setBounds(6, 6, 727, 700);
+        table.setToolTipText("null\n");
+        table.setRowSelectionAllowed(false);
+        table.setColumnSelectionAllowed(false);
+        table.setForeground(Color.WHITE);
+        table.setBorder(new LineBorder(new Color(0, 255, 255), 3));
+        table.setBackground(Color.DARK_GRAY);
+        table.setModel(new DefaultTableModel(
+                new Object[][] {
+                    {null, null, null, null, null, null, null, null, null, null},
+                    {null, null, null, null, null, null, null, null, null, null},
+                    {null, null, null, null, null, null, null, null, null, null},
+                    {null, null, null, null, null, null, null, null, null, null},
+                    {null, null, null, null, null, null, null, null, null, null},
+                    {null, null, null, null, null, null, null, null, null, null},
+                    {null, null, null, null, null, null, null, null, null, null},
+                    {null, null, null, null, null, null, null, null, null, null},
+                    {null, null, null, null, null, null, null, null, null, null},
+                    {null, null, null, null, null, null, null, null, null, null},
+                }, new String[] { null, null, null, null, null, null, null, null, null, null}
+                ));
+        table.setRowHeight(70);
+        //table.setFont(new Font("Serif", Font.BOLD, 50));
+        contentPanel.add(table);
 
                         
         // Add Listeners
@@ -195,8 +196,8 @@ public class seq_client extends JDialog{
     private void hasWinner(String color, JTable table){
         int vcount = 0, hcount = 0, dcount = 0;
            //vertical
-            for (int col = 0; col < 10; col++){
-                for (int row = 0; row < 10; row++){
+            for (int col = 0; col < 9; col++){
+                for (int row = 0; row < 9; row++){
                     if( (table.getValueAt(row,col) != null) && (table.getValueAt(row,col).toString().equals(color))){
                         if (table.getValueAt(row,col).equals(table.getValueAt(row+1,col)))
                             vcount++;
@@ -205,8 +206,8 @@ public class seq_client extends JDialog{
             }
 
             //horizontal
-            for (int row = 0; row < 10; row++){
-                for (int col = 0; col < 10; col++){
+            for (int row = 0; row < 9; row++){
+                for (int col = 0; col < 9; col++){
                     if( (table.getValueAt(row,col) != null) && (table.getValueAt(row,col).toString().equals(color))){
                         if (table.getValueAt(row,col).equals(table.getValueAt(row,col+1)))
                             hcount++;
@@ -215,8 +216,8 @@ public class seq_client extends JDialog{
             }
 
             //diagonal
-            for (int row = 0; row < 10; row++){
-                for (int col = 0; col < 10; col++){
+            for (int row = 0; row < 9; row++){
+                for (int col = 0; col < 9; col++){
                     if( (table.getValueAt(row,col) != null) && (table.getValueAt(row,col).toString().equals(color))){
                         if (table.getValueAt(row,col).equals(table.getValueAt(row+1,col+1)))
                             dcount++;
@@ -229,7 +230,6 @@ public class seq_client extends JDialog{
                 out.println("WINNER!");
             }
     } 
-
     /**
      * Prompt for and return the address of the server.
      */
@@ -322,10 +322,18 @@ public class seq_client extends JDialog{
                 Image img2 = new ImageIcon(this.getClass().getResource(images[num_server])).getImage();
                 cardserver.setIcon(new ImageIcon(img2));
                 
+                num = randnumclient();
+                if(num2 == num){
+                	num = randnumclient();
+                	System.out.println("PASOK");
+                }
+                	
+                spotitlabels();
+                
             } 
-            
+                        
             else if (line.startsWith("CORRECT")) {
-                messageArea_1.append("---------------\n" + line.substring(8) + " gets the correct answer. \n-----------------\n");
+                messageArea_1.append(line.substring(8) + " gets the correct answer.\n");
                 playername = line.substring(8);
                 
                 ctr = true;
@@ -346,7 +354,6 @@ public class seq_client extends JDialog{
                                     //hasWinner(color, table);
                                 }
                                 ctr = false;
-
                             }
                      }
                     });
@@ -355,26 +362,38 @@ public class seq_client extends JDialog{
                 
             } 
             
+            else if(line.startsWith("WINNER")){
+            	int dialogButton = JOptionPane.showConfirmDialog (null, "Would you like to play another game?","Warning",JOptionPane.YES_NO_OPTION);
+            	
+            	if(dialogButton == JOptionPane.NO_OPTION){
+            		JOptionPane.showMessageDialog(null, "Okay, thank you for playing!");
+            		System.exit(0);
+            	}
+            	else{
+                    table.setModel(new DefaultTableModel(
+                            new Object[][] {
+                                {null, null, null, null, null, null, null, null, null, null},
+                                {null, null, null, null, null, null, null, null, null, null},
+                                {null, null, null, null, null, null, null, null, null, null},
+                                {null, null, null, null, null, null, null, null, null, null},
+                                {null, null, null, null, null, null, null, null, null, null},
+                                {null, null, null, null, null, null, null, null, null, null},
+                                {null, null, null, null, null, null, null, null, null, null},
+                                {null, null, null, null, null, null, null, null, null, null},
+                                {null, null, null, null, null, null, null, null, null, null},
+                                {null, null, null, null, null, null, null, null, null, null},
+                            }, new String[] { null, null, null, null, null, null, null, null, null, null}
+                            ));
+                    table.setRowHeight(70);
+            		messageArea_1.setText("");
+            	}
+            }
+            
             else if(line.startsWith("COLOR")){
                 int row = Integer.parseInt(line.substring(5,6));
                 int column = Integer.parseInt(line.substring(7,8));
                 String curr_color = line.substring(9);
                 
-                System.out.println("CURR COLOR: " + curr_color);
-                System.out.println("THIS COLOR: " + color);
-                /*if (curr_color.equalsIgnoreCase("red")){
-                    table.setForeground(Color.RED);
-                }else if (curr_color.equalsIgnoreCase("green")){
-                    table.setForeground(Color.GREEN);
-                }else if (curr_color.equalsIgnoreCase("blue")){
-                    table.setForeground(Color.BLUE);
-                }else if (curr_color.equalsIgnoreCase("magenta")){
-                    table.setForeground(Color.MAGENTA);
-                }else if (curr_color.equalsIgnoreCase("orange")){
-                    table.setForeground(Color.ORANGE);
-                }else if (curr_color.equalsIgnoreCase("white")){
-                    table.setForeground(Color.WHITE);
-                }*/
                 table.getColumnModel().getColumn(0).setCellRenderer(new CustomRenderer());
                 table.getColumnModel().getColumn(1).setCellRenderer(new CustomRenderer());
                 table.getColumnModel().getColumn(2).setCellRenderer(new CustomRenderer());
@@ -429,7 +448,7 @@ private static final long serialVersionUID = 6703872492730589499L;
                     case 3:
                         if(playermatch == "TREE"){
                             out.println("CORRECT");
-                            JOptionPane.showMessageDialog(null, "CORRECT");
+                            JOptionPane.showMessageDialog(null, "The answer is: " + playermatch + "!", "CORRECT!", JOptionPane.PLAIN_MESSAGE);
                         }
                         break;
                     case 4:
@@ -437,7 +456,7 @@ private static final long serialVersionUID = 6703872492730589499L;
                     case 6:
                         if(playermatch == "ICE"){
                             out.println("CORRECT");
-                            JOptionPane.showMessageDialog(null, "CORRECT");
+                            JOptionPane.showMessageDialog(null, "The answer is: " + playermatch + "!", "CORRECT!", JOptionPane.PLAIN_MESSAGE);
                         }
                         break;
                     case 7:
@@ -445,7 +464,7 @@ private static final long serialVersionUID = 6703872492730589499L;
                     case 9:
                         if(playermatch == "DOLPHIN"){
                             out.println("CORRECT");
-                            JOptionPane.showMessageDialog(null, "CORRECT");
+                            JOptionPane.showMessageDialog(null, "The answer is: " + playermatch + "!", "CORRECT!", JOptionPane.PLAIN_MESSAGE);
                         }
                         break;
                     case 10:
@@ -453,12 +472,12 @@ private static final long serialVersionUID = 6703872492730589499L;
                     case 12:
                         if(playermatch == "BULB"){
                             out.println("CORRECT");
-                            JOptionPane.showMessageDialog(null, "CORRECT");
+                            JOptionPane.showMessageDialog(null, "The answer is: " + playermatch + "!", "CORRECT!", JOptionPane.PLAIN_MESSAGE);
                         }
                         break;
                     default:
-                        out.println("HMM");
-                        JOptionPane.showMessageDialog(null, "THERE IS SUMTHING WRONG");
+                        out.println("SAME");
+                        
                         break;
                 }
         } else if(num2 == 1){
@@ -468,7 +487,7 @@ private static final long serialVersionUID = 6703872492730589499L;
                     case 3:
                         if(playermatch == "TREE"){
                             out.println("CORRECT");
-                            JOptionPane.showMessageDialog(null, "CORRECT");
+                            JOptionPane.showMessageDialog(null, "The answer is: " + playermatch + "!", "CORRECT!", JOptionPane.PLAIN_MESSAGE);
                         }
                         break;
                     case 4:
@@ -476,7 +495,7 @@ private static final long serialVersionUID = 6703872492730589499L;
                     case 10:
                         if(playermatch == "BALLOON"){
                             out.println("CORRECT");
-                            JOptionPane.showMessageDialog(null, "CORRECT");
+                            JOptionPane.showMessageDialog(null, "The answer is: " + playermatch + "!", "CORRECT!", JOptionPane.PLAIN_MESSAGE);
                         }
                         break;
                     case 5:
@@ -484,7 +503,7 @@ private static final long serialVersionUID = 6703872492730589499L;
                     case 11:
                         if(playermatch == "YINYANG"){
                             out.println("CORRECT");
-                            JOptionPane.showMessageDialog(null, "CORRECT");
+                            JOptionPane.showMessageDialog(null, "The answer is: " + playermatch + "!", "CORRECT!", JOptionPane.PLAIN_MESSAGE);
                         }
                         break;
                     case 6:
@@ -492,12 +511,12 @@ private static final long serialVersionUID = 6703872492730589499L;
                     case 12:
                         if(playermatch == "SHADES"){
                             out.println("CORRECT");
-                            JOptionPane.showMessageDialog(null, "CORRECT");
+                            JOptionPane.showMessageDialog(null, "The answer is: " + playermatch + "!", "CORRECT!", JOptionPane.PLAIN_MESSAGE);
                         }
                         break;
                     default:
-                        out.println("HMM");
-                        JOptionPane.showMessageDialog(null, "THERE IS SUMTHING WRONG");
+                        out.println("SAME");
+                        
                         break;
                 }
         } else if(num2 == 2){
@@ -507,7 +526,7 @@ private static final long serialVersionUID = 6703872492730589499L;
                     case 3:
                         if(playermatch == "TREE"){
                             out.println("CORRECT");
-                            JOptionPane.showMessageDialog(null, "CORRECT");
+                            JOptionPane.showMessageDialog(null, "The answer is: " + playermatch + "!", "CORRECT!", JOptionPane.PLAIN_MESSAGE);
                         }
                         break;
                     case 4:
@@ -515,7 +534,7 @@ private static final long serialVersionUID = 6703872492730589499L;
                     case 11:
                         if(playermatch == "CHEESE"){
                             out.println("CORRECT");
-                            JOptionPane.showMessageDialog(null, "CORRECT");
+                            JOptionPane.showMessageDialog(null, "The answer is: " + playermatch + "!", "CORRECT!", JOptionPane.PLAIN_MESSAGE);
                         }
                         break;
                     case 5:
@@ -523,7 +542,7 @@ private static final long serialVersionUID = 6703872492730589499L;
                     case 12:
                         if(playermatch == "HAND"){
                             out.println("CORRECT");
-                            JOptionPane.showMessageDialog(null, "CORRECT");
+                            JOptionPane.showMessageDialog(null, "The answer is: " + playermatch + "!", "CORRECT!", JOptionPane.PLAIN_MESSAGE);
                         }
                         break;
                     case 6:
@@ -531,12 +550,12 @@ private static final long serialVersionUID = 6703872492730589499L;
                     case 10:
                         if(playermatch == "BOMB"){
                             out.println("CORRECT");
-                            JOptionPane.showMessageDialog(null, "CORRECT");
+                            JOptionPane.showMessageDialog(null, "The answer is: " + playermatch + "!", "CORRECT!", JOptionPane.PLAIN_MESSAGE);
                         }
                         break;
                     default:
-                        out.println("HMM");
-                        JOptionPane.showMessageDialog(null, "THERE IS SUMTHING WRONG");
+                        out.println("SAME");
+                        
                         break;
                 }
         } else if(num2 == 3){
@@ -546,7 +565,7 @@ private static final long serialVersionUID = 6703872492730589499L;
                     case 3:
                         if(playermatch == "TREE"){
                             out.println("CORRECT");
-                            JOptionPane.showMessageDialog(null, "CORRECT");
+                            JOptionPane.showMessageDialog(null, "The answer is: " + playermatch + "!", "CORRECT!", JOptionPane.PLAIN_MESSAGE);
                         }
                         break;
                     case 4:
@@ -554,7 +573,7 @@ private static final long serialVersionUID = 6703872492730589499L;
                     case 12:
                         if(playermatch == "TARGET"){
                             out.println("CORRECT");
-                            JOptionPane.showMessageDialog(null, "CORRECT");
+                            JOptionPane.showMessageDialog(null, "The answer is: " + playermatch + "!", "CORRECT!", JOptionPane.PLAIN_MESSAGE);
                         }
                         break;
                     case 5:
@@ -562,7 +581,7 @@ private static final long serialVersionUID = 6703872492730589499L;
                     case 10:
                         if(playermatch == "CANDLE"){
                             out.println("CORRECT");
-                            JOptionPane.showMessageDialog(null, "CORRECT");
+                            JOptionPane.showMessageDialog(null, "The answer is: " + playermatch + "!", "CORRECT!", JOptionPane.PLAIN_MESSAGE);
                         }
                         break;
                     case 6:
@@ -570,12 +589,12 @@ private static final long serialVersionUID = 6703872492730589499L;
                     case 11:
                         if(playermatch == "LIPS"){
                             out.println("CORRECT");
-                            JOptionPane.showMessageDialog(null, "CORRECT");
+                            JOptionPane.showMessageDialog(null, "The answer is: " + playermatch + "!", "CORRECT!", JOptionPane.PLAIN_MESSAGE);
                         }
                         break;
                     default:
-                        out.println("HMM");
-                        JOptionPane.showMessageDialog(null, "THERE IS SUMTHING WRONG");
+                        out.println("SAME");
+                        
                         break;
                 }
         } else if(num2 == 4){
@@ -585,7 +604,7 @@ private static final long serialVersionUID = 6703872492730589499L;
                     case 6:
                         if(playermatch == "ICE"){
                             out.println("CORRECT");
-                            JOptionPane.showMessageDialog(null, "CORRECT");
+                            JOptionPane.showMessageDialog(null, "The answer is: " + playermatch + "!", "CORRECT!", JOptionPane.PLAIN_MESSAGE);
                         }
                         break;
                     case 1:
@@ -593,7 +612,7 @@ private static final long serialVersionUID = 6703872492730589499L;
                     case 10:
                         if(playermatch == "BALLOON"){
                             out.println("CORRECT");
-                            JOptionPane.showMessageDialog(null, "CORRECT");
+                            JOptionPane.showMessageDialog(null, "The answer is: " + playermatch + "!", "CORRECT!", JOptionPane.PLAIN_MESSAGE);
                         }
                         break;
                     case 2:
@@ -601,7 +620,7 @@ private static final long serialVersionUID = 6703872492730589499L;
                     case 11:
                         if(playermatch == "CHEESE"){
                             out.println("CORRECT");
-                            JOptionPane.showMessageDialog(null, "CORRECT");
+                            JOptionPane.showMessageDialog(null, "The answer is: " + playermatch + "!", "CORRECT!", JOptionPane.PLAIN_MESSAGE);
                         }
                         break;
                     case 3:
@@ -609,12 +628,12 @@ private static final long serialVersionUID = 6703872492730589499L;
                     case 12:
                         if(playermatch == "TARGET"){
                             out.println("CORRECT");
-                            JOptionPane.showMessageDialog(null, "CORRECT");
+                            JOptionPane.showMessageDialog(null, "The answer is: " + playermatch + "!", "CORRECT!", JOptionPane.PLAIN_MESSAGE);
                         }
                         break;
                     default:
-                        out.println("HMM");
-                        JOptionPane.showMessageDialog(null, "THERE IS SUMTHING WRONG");
+                        out.println("SAME");
+                        
                         break;
                 }
         } else if(num2 == 5){
@@ -624,7 +643,7 @@ private static final long serialVersionUID = 6703872492730589499L;
                     case 6:
                         if(playermatch == "ICE"){
                             out.println("CORRECT");
-                            JOptionPane.showMessageDialog(null, "CORRECT");
+                            JOptionPane.showMessageDialog(null, "The answer is: " + playermatch + "!", "CORRECT!", JOptionPane.PLAIN_MESSAGE);
                         }
                         break;
                     case 1:
@@ -632,7 +651,7 @@ private static final long serialVersionUID = 6703872492730589499L;
                     case 11:
                         if(playermatch == "YINYANG"){
                             out.println("CORRECT");
-                            JOptionPane.showMessageDialog(null, "CORRECT");
+                            JOptionPane.showMessageDialog(null, "The answer is: " + playermatch + "!", "CORRECT!", JOptionPane.PLAIN_MESSAGE);
                         }
                         break;
                     case 2:
@@ -640,7 +659,7 @@ private static final long serialVersionUID = 6703872492730589499L;
                     case 12:
                         if(playermatch == "HAND"){
                             out.println("CORRECT");
-                            JOptionPane.showMessageDialog(null, "CORRECT");
+                            JOptionPane.showMessageDialog(null, "The answer is: " + playermatch + "!", "CORRECT!", JOptionPane.PLAIN_MESSAGE);
                         }
                         break;
                     case 3:
@@ -648,12 +667,12 @@ private static final long serialVersionUID = 6703872492730589499L;
                     case 10:
                         if(playermatch == "CANDLE"){
                             out.println("CORRECT");
-                            JOptionPane.showMessageDialog(null, "CORRECT");
+                            JOptionPane.showMessageDialog(null, "The answer is: " + playermatch + "!", "CORRECT!", JOptionPane.PLAIN_MESSAGE);
                         }
                         break;
                     default:
-                        out.println("HMM");
-                        JOptionPane.showMessageDialog(null, "THERE IS SUMTHING WRONG");
+                        out.println("SAME");
+                        
                         break;
                 }
         } else if(num2 == 6){
@@ -663,7 +682,7 @@ private static final long serialVersionUID = 6703872492730589499L;
                     case 5:
                         if(playermatch == "ICE"){
                             out.println("CORRECT");
-                            JOptionPane.showMessageDialog(null, "CORRECT");
+                            JOptionPane.showMessageDialog(null, "The answer is: " + playermatch + "!", "CORRECT!", JOptionPane.PLAIN_MESSAGE);
                         }
                         break;
                     case 2:
@@ -671,7 +690,7 @@ private static final long serialVersionUID = 6703872492730589499L;
                     case 10:
                         if(playermatch == "BOMB"){
                             out.println("CORRECT");
-                            JOptionPane.showMessageDialog(null, "CORRECT");
+                            JOptionPane.showMessageDialog(null, "The answer is: " + playermatch + "!", "CORRECT!", JOptionPane.PLAIN_MESSAGE);
                         }
                         break;
                     case 3:
@@ -679,7 +698,7 @@ private static final long serialVersionUID = 6703872492730589499L;
                     case 11:
                         if(playermatch == "LIPS"){
                             out.println("CORRECT");
-                            JOptionPane.showMessageDialog(null, "CORRECT");
+                            JOptionPane.showMessageDialog(null, "The answer is: " + playermatch + "!", "CORRECT!", JOptionPane.PLAIN_MESSAGE);
                         }
                         break;
                     case 1:
@@ -687,12 +706,12 @@ private static final long serialVersionUID = 6703872492730589499L;
                     case 12:
                         if(playermatch == "SHADES"){
                             out.println("CORRECT");
-                            JOptionPane.showMessageDialog(null, "CORRECT");
+                            JOptionPane.showMessageDialog(null, "The answer is: " + playermatch + "!", "CORRECT!", JOptionPane.PLAIN_MESSAGE);
                         }
                         break;
                     default:
-                        out.println("HMM");
-                        JOptionPane.showMessageDialog(null, "THERE IS SUMTHING WRONG");
+                        out.println("SAME");
+                        
                         break;
                 }
         } else if (num2 == 7){
@@ -702,7 +721,7 @@ private static final long serialVersionUID = 6703872492730589499L;
                     case 11:
                         if(playermatch == "LIPS"){
                             out.println("CORRECT");
-                            JOptionPane.showMessageDialog(null, "CORRECT");
+                            JOptionPane.showMessageDialog(null, "The answer is: " + playermatch + "!", "CORRECT!", JOptionPane.PLAIN_MESSAGE);
                         }
                         break;
                     case 0:
@@ -710,7 +729,7 @@ private static final long serialVersionUID = 6703872492730589499L;
                     case 9:
                         if(playermatch == "DOLPHIN"){
                             out.println("CORRECT");
-                            JOptionPane.showMessageDialog(null, "CORRECT");
+                            JOptionPane.showMessageDialog(null, "The answer is: " + playermatch + "!", "CORRECT!", JOptionPane.PLAIN_MESSAGE);
                         }
                         break;
                     case 1:
@@ -718,7 +737,7 @@ private static final long serialVersionUID = 6703872492730589499L;
                     case 10:
                         if(playermatch == "BALLOON"){
                             out.println("CORRECT");
-                            JOptionPane.showMessageDialog(null, "CORRECT");
+                            JOptionPane.showMessageDialog(null, "The answer is: " + playermatch + "!", "CORRECT!", JOptionPane.PLAIN_MESSAGE);
                         }
                         break;
                     case 2:
@@ -726,12 +745,12 @@ private static final long serialVersionUID = 6703872492730589499L;
                     case 12:
                         if(playermatch == "HAND"){
                             out.println("CORRECT");
-                            JOptionPane.showMessageDialog(null, "CORRECT");
+                            JOptionPane.showMessageDialog(null, "The answer is: " + playermatch + "!", "CORRECT!", JOptionPane.PLAIN_MESSAGE);
                         }
                         break;
                     default:
-                        out.println("HMM");
-                        JOptionPane.showMessageDialog(null, "THERE IS SUMTHING WRONG");
+                        out.println("SAME");
+                        
                         break;
                 }
         } else if(num2 == 8){
@@ -741,7 +760,7 @@ private static final long serialVersionUID = 6703872492730589499L;
                     case 9:
                         if(playermatch == "DOLPHIN"){
                             out.println("CORRECT");
-                            JOptionPane.showMessageDialog(null, "CORRECT");
+                            JOptionPane.showMessageDialog(null, "The answer is: " + playermatch + "!", "CORRECT!", JOptionPane.PLAIN_MESSAGE);
                         }
                         break;
                     case 2:
@@ -749,7 +768,7 @@ private static final long serialVersionUID = 6703872492730589499L;
                     case 10:
                         if(playermatch == "BOMB"){
                             out.println("CORRECT");
-                            JOptionPane.showMessageDialog(null, "CORRECT");
+                            JOptionPane.showMessageDialog(null, "The answer is: " + playermatch + "!", "CORRECT!", JOptionPane.PLAIN_MESSAGE);
                         }
                         break;
                     case 3:
@@ -757,7 +776,7 @@ private static final long serialVersionUID = 6703872492730589499L;
                     case 12 :
                         if(playermatch == "TARGET"){
                             out.println("CORRECT");
-                            JOptionPane.showMessageDialog(null, "CORRECT");
+                            JOptionPane.showMessageDialog(null, "The answer is: " + playermatch + "!", "CORRECT!", JOptionPane.PLAIN_MESSAGE);
                         }
                         break;
                     case 1:
@@ -765,12 +784,12 @@ private static final long serialVersionUID = 6703872492730589499L;
                     case 11:
                         if(playermatch == "YINYANG"){
                             out.println("CORRECT");
-                            JOptionPane.showMessageDialog(null, "CORRECT");
+                            JOptionPane.showMessageDialog(null, "The answer is: " + playermatch + "!", "CORRECT!", JOptionPane.PLAIN_MESSAGE);
                         }
                         break;
                     default:
-                        out.println("HMM");
-                        JOptionPane.showMessageDialog(null, "THERE IS SUMTHING WRONG");
+                        out.println("SAME");
+                        
                         break;
                 }
         } else if(num2 == 9){
@@ -780,7 +799,7 @@ private static final long serialVersionUID = 6703872492730589499L;
                     case 12:
                         if(playermatch == "SHADES"){
                             out.println("CORRECT");
-                            JOptionPane.showMessageDialog(null, "CORRECT");
+                            JOptionPane.showMessageDialog(null, "The answer is: " + playermatch + "!", "CORRECT!", JOptionPane.PLAIN_MESSAGE);
                         }
                         break;
                     case 3:
@@ -788,7 +807,7 @@ private static final long serialVersionUID = 6703872492730589499L;
                     case 10:
                         if(playermatch == "CANDLE"){
                             out.println("CORRECT");
-                            JOptionPane.showMessageDialog(null, "CORRECT");
+                            JOptionPane.showMessageDialog(null, "The answer is: " + playermatch + "!", "CORRECT!", JOptionPane.PLAIN_MESSAGE);
                         }
                         break;
                     case 2:
@@ -796,7 +815,7 @@ private static final long serialVersionUID = 6703872492730589499L;
                     case 11 :
                         if(playermatch == "CHEESE"){
                             out.println("CORRECT");
-                            JOptionPane.showMessageDialog(null, "CORRECT");
+                            JOptionPane.showMessageDialog(null, "The answer is: " + playermatch + "!", "CORRECT!", JOptionPane.PLAIN_MESSAGE);
                         }
                         break;
                     case 0:
@@ -804,12 +823,12 @@ private static final long serialVersionUID = 6703872492730589499L;
                     case 8:
                         if(playermatch == "DOLPHIN"){
                             out.println("CORRECT");
-                            JOptionPane.showMessageDialog(null, "CORRECT");
+                            JOptionPane.showMessageDialog(null, "The answer is: " + playermatch + "!", "CORRECT!", JOptionPane.PLAIN_MESSAGE);
                         }
                         break;
                     default:
-                        out.println("HMM");
-                        JOptionPane.showMessageDialog(null, "THERE IS SUMTHING WRONG");
+                        out.println("SAME");
+                        
                         break;
                 }
         }else if(num2 == 10){
@@ -819,7 +838,7 @@ private static final long serialVersionUID = 6703872492730589499L;
                     case 11:
                         if(playermatch == "BULB"){
                             out.println("CORRECT");
-                            JOptionPane.showMessageDialog(null, "CORRECT");
+                            JOptionPane.showMessageDialog(null, "The answer is: " + playermatch + "!", "CORRECT!", JOptionPane.PLAIN_MESSAGE);
                         }
                         break;
                     case 1:
@@ -827,7 +846,7 @@ private static final long serialVersionUID = 6703872492730589499L;
                     case 7:
                         if(playermatch == "BALLOON"){
                             out.println("CORRECT");
-                            JOptionPane.showMessageDialog(null, "CORRECT");
+                            JOptionPane.showMessageDialog(null, "The answer is: " + playermatch + "!", "CORRECT!", JOptionPane.PLAIN_MESSAGE);
                         }
                         break;
                     case 2:
@@ -835,7 +854,7 @@ private static final long serialVersionUID = 6703872492730589499L;
                     case 8 :
                         if(playermatch == "BOMB"){
                             out.println("CORRECT");
-                            JOptionPane.showMessageDialog(null, "CORRECT");
+                            JOptionPane.showMessageDialog(null, "The answer is: " + playermatch + "!", "CORRECT!", JOptionPane.PLAIN_MESSAGE);
                         }
                         break;
                     case 3:
@@ -843,12 +862,12 @@ private static final long serialVersionUID = 6703872492730589499L;
                     case 9:
                         if(playermatch == "CANDLE"){
                             out.println("CORRECT");
-                            JOptionPane.showMessageDialog(null, "CORRECT");
+                            JOptionPane.showMessageDialog(null, "The answer is: " + playermatch + "!", "CORRECT!", JOptionPane.PLAIN_MESSAGE);
                         }
                         break;
                     default:
-                        out.println("HMM");
-                        JOptionPane.showMessageDialog(null, "THERE IS SUMTHING WRONG");
+                        out.println("SAME");
+                        
                         break;
                 }
         } else if(num2 == 11){
@@ -858,7 +877,7 @@ private static final long serialVersionUID = 6703872492730589499L;
                     case 8:
                         if(playermatch == "YINYANG"){
                             out.println("CORRECT");
-                            JOptionPane.showMessageDialog(null, "CORRECT");
+                            JOptionPane.showMessageDialog(null, "The answer is: " + playermatch + "!", "CORRECT!", JOptionPane.PLAIN_MESSAGE);
                         }
                         break;
                     case 2:
@@ -866,7 +885,7 @@ private static final long serialVersionUID = 6703872492730589499L;
                     case 9:
                         if(playermatch == "CHEESE"){
                             out.println("CORRECT");
-                            JOptionPane.showMessageDialog(null, "CORRECT");
+                            JOptionPane.showMessageDialog(null, "The answer is: " + playermatch + "!", "CORRECT!", JOptionPane.PLAIN_MESSAGE);
                         }
                         break;
                     case 0:
@@ -874,7 +893,7 @@ private static final long serialVersionUID = 6703872492730589499L;
                     case 12 :
                         if(playermatch == "BULB"){
                             out.println("CORRECT");
-                            JOptionPane.showMessageDialog(null, "CORRECT");
+                            JOptionPane.showMessageDialog(null, "The answer is: " + playermatch + "!", "CORRECT!", JOptionPane.PLAIN_MESSAGE);
                         }
                         break;
                     case 3:
@@ -882,12 +901,12 @@ private static final long serialVersionUID = 6703872492730589499L;
                     case 7:
                         if(playermatch == "LIPS"){
                             out.println("CORRECT");
-                            JOptionPane.showMessageDialog(null, "CORRECT");
+                            JOptionPane.showMessageDialog(null, "The answer is: " + playermatch + "!", "CORRECT!", JOptionPane.PLAIN_MESSAGE);
                         }
                         break;
                     default:
-                        out.println("HMM");
-                        JOptionPane.showMessageDialog(null, "THERE IS SUMTHING WRONG");
+                        out.println("SAME");
+                        
                         break;
                 }
         } else if(num2 == 12){
@@ -897,7 +916,7 @@ private static final long serialVersionUID = 6703872492730589499L;
                     case 8:
                         if(playermatch == "TARGET"){
                             out.println("CORRECT");
-                            JOptionPane.showMessageDialog(null, "CORRECT");
+                            JOptionPane.showMessageDialog(null, "The answer is: " + playermatch + "!", "CORRECT!", JOptionPane.PLAIN_MESSAGE);
                         }
                         break;
                     case 0:
@@ -905,7 +924,7 @@ private static final long serialVersionUID = 6703872492730589499L;
                     case 11:
                         if(playermatch == "BULB"){
                             out.println("CORRECT");
-                            JOptionPane.showMessageDialog(null, "CORRECT");
+                            JOptionPane.showMessageDialog(null, "The answer is: " + playermatch + "!", "CORRECT!", JOptionPane.PLAIN_MESSAGE);
                         }
                         break;
                     case 2:
@@ -913,7 +932,7 @@ private static final long serialVersionUID = 6703872492730589499L;
                     case 7 :
                         if(playermatch == "HAND"){
                             out.println("CORRECT");
-                            JOptionPane.showMessageDialog(null, "CORRECT");
+                            JOptionPane.showMessageDialog(null, "The answer is: " + playermatch + "!", "CORRECT!", JOptionPane.PLAIN_MESSAGE);
                         }
                         break;
                     case 1:
@@ -921,12 +940,12 @@ private static final long serialVersionUID = 6703872492730589499L;
                     case 9:
                         if(playermatch == "SHADES"){
                             out.println("CORRECT");
-                            JOptionPane.showMessageDialog(null, "CORRECT");
+                            JOptionPane.showMessageDialog(null, "The answer is: " + playermatch + "!", "CORRECT!", JOptionPane.PLAIN_MESSAGE);
                         }
                         break;
                     default:
-                        out.println("HMM");
-                        JOptionPane.showMessageDialog(null, "THERE IS SUMTHING WRONG");
+                        out.println("SAME");
+                        
                         break;
                 }
         }
@@ -1212,17 +1231,25 @@ private static final long serialVersionUID = 6703872492730589499L;
         }
     }
     
-    private void spotitlabels(){
+    private int randnumclient(){
         Random rand = new Random();
-        int num = rand.nextInt(images.length-1) + 1;
+        int num1 = rand.nextInt(images.length-1) + 1;
         
-        System.out.println("PASSED NUM: " + num);
-        
+    	return num1;
+    }
+    
+    private void spotitlabels(){    	
         // For the spot it card
         panel.setBounds(739, 231, 483, 475);
         contentPanel.add(panel);
         panel.setLayout(null);
+        
+
+        spotitcard.setBounds(119, 141, 199, 197);
+        panel.add(spotitcard);
+        
         Image img = new ImageIcon(this.getClass().getResource(images[num])).getImage();
+        spotitcard.setIcon(new ImageIcon(img));
         
         topsymbol.addMouseListener(new MouseAdapter() {
             @Override
@@ -1261,9 +1288,6 @@ private static final long serialVersionUID = 6703872492730589499L;
         rightsymbol.setBounds(232, 204, 78, 63);
         panel.add(rightsymbol);
         
-        spotitcard.setBounds(119, 141, 199, 197);
-        panel.add(spotitcard);
-        spotitcard.setIcon(new ImageIcon(img));
         // End of if for spot it card     
     }
 

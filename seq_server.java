@@ -196,10 +196,18 @@ public class seq_server {
 	                        writer.println("COLOR" + row + "," + col + "," + curr_color);
                         }
                         
+                        else if (input.startsWith("SAME")){
+                        	writer.println("SAME");
+                        }
+                        
+                        else if (input.startsWith("WINNER")){
+                        	writer.println("WINNER");
+                        }
+                        
                         else{
                             Calendar now = Calendar.getInstance();
                             SimpleDateFormat formatter = new SimpleDateFormat("E yyyy.MM.dd 'at' hh:mm:ss a zzz");
-                            writer.println("MESSAGE " + name + ": " + input + "\t" + formatter.format(now.getTime()));
+                            //writer.println("MESSAGE " + name + ": " + input + "\t" + formatter.format(now.getTime()));
                         } 
                     }
                 }
