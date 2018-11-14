@@ -20,7 +20,6 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.Color;
-import java.awt.Font;
 import javax.swing.JTable;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
@@ -53,9 +52,10 @@ import java.awt.Component;
 public class seq_client extends JDialog{
     
     private static final long serialVersionUID = 1L;
-
-    String playermatch = "";
     
+    String player;
+    String playermatch = "";
+    int pindot = 0;
     BufferedReader in;
     PrintWriter out;
     JFrame frame = new JFrame("Chatter");
@@ -100,7 +100,6 @@ public class seq_client extends JDialog{
      * message from the server.
      */
     public seq_client() {
-        setTitle("Spot Then Sequence");
         setBounds(100, 100, 1251, 766);
         getContentPane().setLayout(null);
         contentPanel.setBounds(0, 0, 1229, 710);
@@ -162,7 +161,6 @@ public class seq_client extends JDialog{
                 }, new String[] { null, null, null, null, null, null, null, null, null, null}
                 ));
         table.setRowHeight(70);
-        //table.setFont(new Font("Serif", Font.BOLD, 50));
         contentPanel.add(table);
 
                         
@@ -245,11 +243,13 @@ public class seq_client extends JDialog{
      * Prompt for and return the desired screen name.
      */
     public String getName() {
-        return JOptionPane.showInputDialog(
+        player =  JOptionPane.showInputDialog(
             frame,
             "Choose a screen name:",
             "Screen name selection",
             JOptionPane.PLAIN_MESSAGE);
+        
+        return player;
     }
 
 
@@ -266,7 +266,8 @@ public class seq_client extends JDialog{
      * Connects to the server then enters the processing loop.
      */
     private void run() throws IOException {
-
+    	//int pindot;
+    	
         // Make connection and initialize streams
         String serverAddress = getServerAddress();
         @SuppressWarnings("resource")
@@ -283,27 +284,11 @@ public class seq_client extends JDialog{
             if (line.startsWith("SUBMITNAME")) {
                 this.name = getName();
                 out.println(name);
-            } 
+            }
             
             else if (line.startsWith("NAMEACCEPTED")) {
                 textField_1.setEditable(true);
                 JOptionPane.showMessageDialog(frame, "Welcome! Please wait for others to join the conversation...");
-            
-            }
-            
-            else if (line.startsWith("PLAYERS")){
-                String temp = line.substring(8);
-                
-                i = 0;
-                temp = temp.replaceAll("\\[|\\]", ""); 
-                temp = temp.replaceAll(",", "");
-                
-                StringTokenizer st = new StringTokenizer(temp);
-                while (st.hasMoreTokens()) {
-                    players[i] = st.nextToken();
-                    i++;
-                }
-                
             }
             
             else if (line.startsWith("MESSAGE")) {
@@ -312,12 +297,13 @@ public class seq_client extends JDialog{
             
             else if (line.startsWith("SUBMITCOLOR")) {
                 this.color = getColor();
+                out.println(color);
+                setTitle("Spot Then Sequence - Player " + this.name + " (" + this.color + ")");
             } 
             
             else if (line.startsWith("SERVER")) {
                 num_server = Integer.parseInt(line.substring(7));
                 num2 = num_server;
-                
                 
                 Image img2 = new ImageIcon(this.getClass().getResource(images[num_server])).getImage();
                 cardserver.setIcon(new ImageIcon(img2));
@@ -329,7 +315,6 @@ public class seq_client extends JDialog{
                 }
                 	
                 spotitlabels();
-                
             } 
                         
             else if (line.startsWith("CORRECT")) {
@@ -337,29 +322,39 @@ public class seq_client extends JDialog{
                 playername = line.substring(8);
                 
                 ctr = true;
+                //pindot = 0;
                 table.addMouseListener(new java.awt.event.MouseAdapter() {
                     @Override
                      public void mousePressed(java.awt.event.MouseEvent evt) {
                             if(ctr == true && name.equals(playername)){
                                 int row = table.rowAtPoint(evt.getPoint());
                                 int col = table.columnAtPoint(evt.getPoint());
-                                if (row >= 0 && col >= 0) {
-                                    table.setValueAt(color,row,col);
-                                    out.println("COLOR" + row + "," + col + "," + color);
-                                    if (row == 0 && col == 1) {
+                                if (row >= 0 && col >= 0 && table.getValueAt(row, col) == null) {
+                                	//if(){
+                                		System.out.println("ASOK");
+                                		out.println("COLOR" + row + "," + col + "," + color);
+                                		table.setValueAt(color,row,col);
+                                		
+                                	//}
+                                	//else{
+                                	//	ctr = true;
+                                	//}
+                                    
+                                    /*if (row == 0 && col == 1) {
                                         a1.setIcon(new ImageIcon("blue.png"));
                                         a1.setEnabled(true);
-
-                                    }
-                                    //hasWinner(color, table);
+                                    }*/
+                                		ctr = false;
                                 }
-                                ctr = false;
+                                else{
+                                pindot++;
+                                ctr = true;
+                                }
                             }
                      }
                     });
                 
                 out.println("NEXT");
-                
             } 
             
             else if(line.startsWith("WINNER")){
@@ -370,7 +365,7 @@ public class seq_client extends JDialog{
             		System.exit(0);
             	}
             	else{
-                    table.setModel(new DefaultTableModel(
+                    this.table.setModel(new DefaultTableModel(
                             new Object[][] {
                                 {null, null, null, null, null, null, null, null, null, null},
                                 {null, null, null, null, null, null, null, null, null, null},
@@ -411,6 +406,7 @@ public class seq_client extends JDialog{
             
             i++;
         }
+        
     }
 
 class CustomRenderer extends DefaultTableCellRenderer 
@@ -1243,7 +1239,6 @@ private static final long serialVersionUID = 6703872492730589499L;
         panel.setBounds(739, 231, 483, 475);
         contentPanel.add(panel);
         panel.setLayout(null);
-        
 
         spotitcard.setBounds(119, 141, 199, 197);
         panel.add(spotitcard);

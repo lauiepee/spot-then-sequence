@@ -133,6 +133,7 @@ public class seq_server {
                     out.println("SUBMITNAME");
                     name = in.readLine();
                     if (name == null) {
+                    	
                         return;
                     }
                     synchronized (names) {
@@ -156,17 +157,19 @@ public class seq_server {
                         }
                     }
                 }
-                
 
                 // Now that a successful name has been chosen, add the
                 // socket's print writer to the set of all writers so
                 // this client can receive broadcast messages.
                 //out.println("NAMEACCEPTED");
                 writers.add(out);
-                
+
+                for (PrintWriter writer: writers){
+            		writer.println("MESSAGE " + name + " has joined the game using color " + color + ".\n");
+            	}
 
                 out.println("SERVER " + num2);
-                out.println("PLAYERS " + names);
+                
                 // Accept messages from this client and broadcast them.
                 // Ignore other clients that cannot be broadcasted to.
                 while (true) {
@@ -180,7 +183,7 @@ public class seq_server {
                     num2 = rand2.nextInt(images.length-1) + 1;
                     
                     for (PrintWriter writer : writers) {
-                        if (input.startsWith("CORRECT")){
+                    	if (input.startsWith("CORRECT")){
                             writer.println("CORRECT " + name);
                         }
                                                 
@@ -194,10 +197,6 @@ public class seq_server {
                         	String curr_color = input.substring(9);
                         	
 	                        writer.println("COLOR" + row + "," + col + "," + curr_color);
-                        }
-                        
-                        else if (input.startsWith("SAME")){
-                        	writer.println("SAME");
                         }
                         
                         else if (input.startsWith("WINNER")){
@@ -217,7 +216,11 @@ public class seq_server {
                 // This client is going down!  Remove its name and its print
                 // writer from the sets, and close its socket.
                 if (name != null) {
+                	for (PrintWriter writer : writers) {
+                		writer.println("MESSAGE " + name + " has left the game.");
+                	}
                     names.remove(name);
+                    
                 }
                 if (out != null) {
                     writers.remove(out);
