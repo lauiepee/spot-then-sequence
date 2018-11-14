@@ -160,6 +160,7 @@ public class seq_client extends JDialog{
                     {null, null, null, null, null, null, null, null, null, null},
                 }, new String[] { null, null, null, null, null, null, null, null, null, null}
                 ));
+        table.setDefaultEditor(Object.class, null);
         table.setRowHeight(70);
         contentPanel.add(table);
 
