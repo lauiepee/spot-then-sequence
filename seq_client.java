@@ -421,16 +421,22 @@ private static final long serialVersionUID = 6703872492730589499L;
 
         if(value.toString().equalsIgnoreCase("blue")){
             cellComponent.setBackground(Color.BLUE);
+            cellComponent.setForeground(Color.BLUE);
         } else if (value.toString().equalsIgnoreCase("red")){
             cellComponent.setBackground(Color.RED);
+            cellComponent.setForeground(Color.RED);
         } else if (value.toString().equalsIgnoreCase("green")){
             cellComponent.setBackground(Color.GREEN);
+            cellComponent.setForeground(Color.GREEN);
         } else if (value.toString().equalsIgnoreCase("PINK")){
             cellComponent.setBackground(Color.MAGENTA);
+            cellComponent.setForeground(Color.MAGENTA);
         } else if (value.toString().equalsIgnoreCase("ORANGE")){
             cellComponent.setBackground(Color.ORANGE);
+            cellComponent.setForeground(Color.ORANGE);
         } else if (value.toString().equalsIgnoreCase("YELLOW")){
             cellComponent.setBackground(Color.YELLOW);
+            cellComponent.setForeground(Color.YELLOW);
         }
         return cellComponent;
         
