@@ -206,7 +206,7 @@ public class seq_server {
                         else{
                             Calendar now = Calendar.getInstance();
                             SimpleDateFormat formatter = new SimpleDateFormat("E yyyy.MM.dd 'at' hh:mm:ss a zzz");
-                            //writer.println("MESSAGE " + name + ": " + input + "\t" + formatter.format(now.getTime()));
+                            writer.println("MESSAGE " + name + ": " + input + "\t" + formatter.format(now.getTime()));
                         } 
                     }
                 }
