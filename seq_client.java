@@ -163,8 +163,8 @@ public class seq_client extends JDialog{
     private void hasWinner(String color, JTable table){
         int vcount = 0, hcount = 0, dcount = 0;
            //vertical
-            for (int col = 0; col < 9; col++){
-                for (int row = 0; row < 9; row++){
+            for (int col = 0; col <= 9; col++){
+                for (int row = 0; row <= 9; row++){
                     if( (table.getValueAt(row,col) != null) && (table.getValueAt(row,col).toString().equals(color))){
                         if (table.getValueAt(row,col).equals(table.getValueAt(row+1,col)))
                             vcount++;
@@ -173,8 +173,8 @@ public class seq_client extends JDialog{
             }
 
             //horizontal
-            for (int row = 0; row < 9; row++){
-                for (int col = 0; col < 9; col++){
+            for (int row = 0; row <= 9; row++){
+                for (int col = 0; col <= 9; col++){
                     if( (table.getValueAt(row,col) != null) && (table.getValueAt(row,col).toString().equals(color))){
                         if (table.getValueAt(row,col).equals(table.getValueAt(row,col+1)))
                             hcount++;
@@ -183,8 +183,8 @@ public class seq_client extends JDialog{
             }
 
             //diagonal
-            for (int row = 0; row < 9; row++){
-                for (int col = 0; col < 9; col++){
+            for (int row = 0; row <= 9; row++){
+                for (int col = 0; col <= 9; col++){
                     if( (table.getValueAt(row,col) != null) && (table.getValueAt(row,col).toString().equals(color))){
                         if (table.getValueAt(row,col).equals(table.getValueAt(row+1,col+1)))
                             dcount++;
