@@ -26,6 +26,7 @@ import javax.swing.ImageIcon;
 
 import javax.swing.table.DefaultTableCellRenderer;
 import java.awt.Component;
+import java.awt.Font;
 
 /**
  * A simple Swing-based client for the chat server.  Graphically
@@ -151,6 +152,7 @@ public class seq_client extends JDialog{
         panel_2.setLayout(null);
         
         textField = new JTextField();
+        textField.setFont(new Font("Thohir Ke Badreah", Font.PLAIN, 15));
         textField.setDisabledTextColor(Color.BLACK);
         textField.setEnabled(false);
         textField.setEditable(false);
@@ -163,8 +165,8 @@ public class seq_client extends JDialog{
     private void hasWinner(String color, JTable table){
         int vcount = 0, hcount = 0, dcount = 0;
            //vertical
-            for (int col = 0; col <= 9; col++){
-                for (int row = 0; row <= 9; row++){
+            for (int col = 0; col < 9; col++){
+                for (int row = 0; row < 9; row++){
                     if( (table.getValueAt(row,col) != null) && (table.getValueAt(row,col).toString().equals(color))){
                         if (table.getValueAt(row,col).equals(table.getValueAt(row+1,col)))
                             vcount++;
@@ -173,8 +175,8 @@ public class seq_client extends JDialog{
             }
 
             //horizontal
-            for (int row = 0; row <= 9; row++){
-                for (int col = 0; col <= 9; col++){
+            for (int row = 0; row < 9; row++){
+                for (int col = 0; col < 9; col++){
                     if( (table.getValueAt(row,col) != null) && (table.getValueAt(row,col).toString().equals(color))){
                         if (table.getValueAt(row,col).equals(table.getValueAt(row,col+1)))
                             hcount++;
@@ -183,8 +185,8 @@ public class seq_client extends JDialog{
             }
 
             //diagonal
-            for (int row = 0; row <= 9; row++){
-                for (int col = 0; col <= 9; col++){
+            for (int row = 0; row < 9; row++){
+                for (int col = 0; col < 9; col++){
                     if( (table.getValueAt(row,col) != null) && (table.getValueAt(row,col).toString().equals(color))){
                         if (table.getValueAt(row,col).equals(table.getValueAt(row+1,col+1)))
                             dcount++;
@@ -280,12 +282,11 @@ public class seq_client extends JDialog{
                 if(num2 == num){
                 	num = randnumclient();
                 }
-                
-                spotitcard.setIcon(null);
                 spotitlabels();
             } 
                         
             else if (line.startsWith("CORRECT")) {
+            	textField.setFont(new Font("Thohir Ke Badreah", Font.PLAIN, 15));
                 textField.setText(line.substring(8) + " gets the correct answer.\n");
                 textField.setBackground(Color.CYAN);
                 playername = line.substring(8);
@@ -337,6 +338,7 @@ public class seq_client extends JDialog{
                     table.setRowHeight(70);
                     table.setDefaultEditor(Object.class, null);
             		textField.setText("New game!");
+            		textField.setBackground(Color.GREEN);
             	}
             }
             
