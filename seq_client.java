@@ -302,6 +302,8 @@ public class seq_client extends JDialog{
                             		out.println("COLOR" + row + "," + col + "," + color);
                             		table.setValueAt(color,row,col);
                             		ctr = false;
+
+                                    textField.setBackground(Color.LIGHT_GRAY);
                                 }
                                 else{
 	                                ctr = true;

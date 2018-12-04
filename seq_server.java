@@ -187,10 +187,10 @@ public class seq_server {
                             writer.println("CORRECT " + name);
                         }
                                                 
-                        else if (input.startsWith("NEXT")){
+                        else if (input.startsWith("NEXT") || input.startsWith("SAME")){
                             writer.println("SERVER " + num2);
                         }
-                        
+                    	
                         else if (input.startsWith("COLOR")){
                         	int row = Integer.parseInt(input.substring(5,6));
                         	int col = Integer.parseInt(input.substring(7,8));
@@ -206,7 +206,8 @@ public class seq_server {
                         else{
                             Calendar now = Calendar.getInstance();
                             SimpleDateFormat formatter = new SimpleDateFormat("E yyyy.MM.dd 'at' hh:mm:ss a zzz");
-                            writer.println("MESSAGE " + name + ": " + input + "\t" + formatter.format(now.getTime()));
+                            //writer.println("MESSAGE " + name + ": " + input + "\t" + formatter.format(now.getTime()));
+                            writer.println("MESSAGE " + formatter.format(now.getTime()));
                         } 
                     }
                 }
