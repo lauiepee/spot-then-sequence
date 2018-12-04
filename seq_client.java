@@ -152,7 +152,7 @@ public class seq_client extends JDialog{
         panel_2.setLayout(null);
         
         textField = new JTextField();
-        textField.setFont(new Font("Thohir Ke Badreah", Font.PLAIN, 15));
+        textField.setFont(new Font("Thohir Ke Badreah", Font.PLAIN, 14));
         textField.setDisabledTextColor(Color.BLACK);
         textField.setEnabled(false);
         textField.setEditable(false);
@@ -286,7 +286,7 @@ public class seq_client extends JDialog{
             } 
                         
             else if (line.startsWith("CORRECT")) {
-            	textField.setFont(new Font("Thohir Ke Badreah", Font.PLAIN, 15));
+            	textField.setFont(new Font("Thohir Ke Badreah", Font.PLAIN, 14));
                 textField.setText(line.substring(8) + " gets the correct answer.\n");
                 textField.setBackground(Color.CYAN);
                 playername = line.substring(8);
@@ -302,8 +302,6 @@ public class seq_client extends JDialog{
                             		out.println("COLOR" + row + "," + col + "," + color);
                             		table.setValueAt(color,row,col);
                             		ctr = false;
-
-                                    textField.setBackground(Color.LIGHT_GRAY);
                                 }
                                 else{
 	                                ctr = true;
